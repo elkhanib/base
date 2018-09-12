@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.bosch.inst.esurvey.base.rest.ControllerAdviser,\
+  com.bosch.inst.esurvey.base.rest.ExceptionController,\
+  com.bosch.inst.esurvey.base.rest.ServletContainerCustomizer
