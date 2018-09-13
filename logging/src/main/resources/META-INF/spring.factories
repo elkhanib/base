@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.bosch.inst.esurvey.base.logging.LoggingAspect
