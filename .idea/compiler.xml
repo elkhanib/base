@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="base-logging" />
+        <module name="base-querydsl" />
         <module name="base-rest" />
         <module name="base-security" />
       </profile>

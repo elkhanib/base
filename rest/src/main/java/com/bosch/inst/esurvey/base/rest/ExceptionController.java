@@ -2,6 +2,7 @@ package com.bosch.inst.esurvey.base.rest;
 
 import com.bosch.inst.esurvey.base.rest.entity.ErrorMsg;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.hateoas.VndErrors;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,21 +16,22 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @RequestMapping(value = "/error")
 public class ExceptionController {
+    public static final String LOGREF_ERROR = "error";
 
     @GetMapping(value = "/400", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
-    public ErrorMsg BadRequest() {
+    public VndErrors.VndError BadRequest() {
         log.error(HttpStatus.BAD_REQUEST.getReasonPhrase());
-//		return new VndErrors.VndError(String.valueOf(HttpStatus.BAD_REQUEST.value()), HttpStatus.BAD_REQUEST.getReasonPhrase());
-
-        return new ErrorMsg(HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.getReasonPhrase());
+        return new VndErrors.VndError(String.valueOf(HttpStatus.BAD_REQUEST.value()), HttpStatus.BAD_REQUEST.getReasonPhrase());
+//        return new ErrorMsg(HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.getReasonPhrase());
     }
 
     @GetMapping(value = "/401", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseStatus(value = HttpStatus.UNAUTHORIZED)
-    public ErrorMsg missingLogin() {
+    public VndErrors.VndError missingLogin() {
         log.warn(HttpStatus.UNAUTHORIZED.getReasonPhrase());
-        return new ErrorMsg(HttpStatus.UNAUTHORIZED.value(), HttpStatus.UNAUTHORIZED.getReasonPhrase());
+        return new VndErrors.VndError(String.valueOf(HttpStatus.UNAUTHORIZED.value()), HttpStatus.UNAUTHORIZED.getReasonPhrase());
+//        return new ErrorMsg(HttpStatus.UNAUTHORIZED.value(), HttpStatus.UNAUTHORIZED.getReasonPhrase());
     }
 
     @GetMapping(value = "/403", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -41,14 +43,15 @@ public class ExceptionController {
 
     @GetMapping(value = "/404", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
-    public ErrorMsg missingResource() {
+    public VndErrors.VndError missingResource() {
         log.warn(HttpStatus.NOT_FOUND.getReasonPhrase());
-        return new ErrorMsg(HttpStatus.NOT_FOUND.value(), HttpStatus.NOT_FOUND.getReasonPhrase());
+        return new VndErrors.VndError(String.valueOf(HttpStatus.NOT_FOUND.value()), HttpStatus.NOT_FOUND.getReasonPhrase());
+//        return new ErrorMsg(HttpStatus.NOT_FOUND.value(), HttpStatus.NOT_FOUND.getReasonPhrase());
     }
 
     @GetMapping(value = "/500", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
-    public ErrorMsg uncaughtException(HttpServletRequest request) {
+    public VndErrors.VndError uncaughtException(HttpServletRequest request) {
         // retrieve some useful information from the request
         // String servletName = (String) request.getAttribute("javax.servlet.error.servlet_name");
         // Integer statusCode = (Integer) request.getAttribute("javax.servlet.error.status_code");
@@ -57,14 +60,16 @@ public class ExceptionController {
         Exception ex = (Exception) request.getAttribute("javax.servlet.error.exception");
 
         log.error(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(), ex);
-        return new ErrorMsg(HttpStatus.INTERNAL_SERVER_ERROR.value(), ex.getMessage());
+        return new VndErrors.VndError(String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()), ex.getMessage());
+//        return new ErrorMsg(HttpStatus.INTERNAL_SERVER_ERROR.value(), ex.getMessage());
     }
 
     @GetMapping(value = "/503", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseStatus(value = HttpStatus.SERVICE_UNAVAILABLE)
-    public ErrorMsg unsupportedServletMethod() {
+    public VndErrors.VndError unsupportedServletMethod() {
         log.warn(HttpStatus.SERVICE_UNAVAILABLE.getReasonPhrase());
-        return new ErrorMsg(HttpStatus.SERVICE_UNAVAILABLE.value(), HttpStatus.SERVICE_UNAVAILABLE.getReasonPhrase());
+        return new VndErrors.VndError(String.valueOf(HttpStatus.SERVICE_UNAVAILABLE.value()), HttpStatus.SERVICE_UNAVAILABLE.getReasonPhrase());
+//        return new ErrorMsg(HttpStatus.SERVICE_UNAVAILABLE.value(), HttpStatus.SERVICE_UNAVAILABLE.getReasonPhrase());
     }
 
 }
