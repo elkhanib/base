@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.bosch.inst.esurvey.base.security.service.impl.UserServiceImpl,\
+  com.bosch.inst.esurvey.base.security.WebSecurityConfig

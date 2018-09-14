@@ -1,4 +1,4 @@
-package com.bosch.inst.esurvey.base.logging;
+package com.bosch.inst.esurvey.base;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;

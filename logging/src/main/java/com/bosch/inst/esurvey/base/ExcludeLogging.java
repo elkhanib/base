@@ -1,4 +1,4 @@
-package com.bosch.inst.esurvey.base.logging;
+package com.bosch.inst.esurvey.base;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="base-logging" />
         <module name="base-rest" />
+        <module name="base-security" />
       </profile>
     </annotationProcessing>
   </component>
