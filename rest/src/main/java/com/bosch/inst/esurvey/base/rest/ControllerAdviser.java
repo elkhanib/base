@@ -23,7 +23,7 @@ public class ControllerAdviser {
     @ExceptionHandler(NoSuchElementException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     ErrorMsg noSuchElementExceptionHandler(NoSuchElementException ex) {
-        log.warn(ex.getLocalizedMessage());
+        log.warn("Error", ex);
         return new ErrorMsg(ErrorDef.NO_SUCH_ELEMENT_EXCEPTION.getValue(), ErrorDef.NO_SUCH_ELEMENT_EXCEPTION.getReasonPhrase() + ": " + ex.getMessage());
     }
 
@@ -31,7 +31,7 @@ public class ControllerAdviser {
     @ExceptionHandler(IllegalArgumentException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     ErrorMsg illegalArgumentExceptionHandler(IllegalArgumentException ex) {
-        log.warn(ex.getLocalizedMessage());
+        log.warn("Error", ex);
         return new ErrorMsg(ErrorDef.ILLEGAL_ARGUMENT_EXCEPTION.getValue(), ErrorDef.ILLEGAL_ARGUMENT_EXCEPTION.getReasonPhrase() + ": " + ex.getMessage());
     }
 
@@ -46,7 +46,7 @@ public class ControllerAdviser {
     @ExceptionHandler(NumberFormatException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     ErrorMsg dataAccessExceptionHandler(NumberFormatException ex) {
-        log.warn(ex.getLocalizedMessage());
+        log.warn("Error", ex);
         return new ErrorMsg(ErrorDef.NUMBER_FORMAT_EXCEPTION.getValue(), ErrorDef.NUMBER_FORMAT_EXCEPTION.getReasonPhrase() + ": " + ex.getMessage());
     }
 
@@ -54,7 +54,7 @@ public class ControllerAdviser {
     @ExceptionHandler(IllegalStateException.class)
     @ResponseStatus(HttpStatus.PRECONDITION_FAILED)
     ErrorMsg illegalStateExceptionHandler(IllegalStateException ex) {
-        log.warn(ex.getLocalizedMessage());
+        log.warn("Error", ex);
         return new ErrorMsg(ErrorDef.ILLEGAL_STATE_EXCEPTION.getValue(), ErrorDef.ILLEGAL_STATE_EXCEPTION.getReasonPhrase() + ": " + ex.getMessage());
     }
 
