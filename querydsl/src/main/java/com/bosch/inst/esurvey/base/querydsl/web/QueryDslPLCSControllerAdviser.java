@@ -1,6 +1,7 @@
 package com.bosch.inst.esurvey.base.querydsl.web;
 
 import com.bosch.inst.esurvey.base.querydsl.UnknownRequestParameterException;
+import com.bosch.inst.esurvey.base.rest.entity.ErrorDef;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.annotation.Order;
 import org.springframework.hateoas.VndErrors.VndError;
@@ -26,6 +27,6 @@ public class QueryDslPLCSControllerAdviser {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     VndError unknownRequestParameterException(UnknownRequestParameterException ex) {
         log.warn(ex.getLocalizedMessage());
-        return new VndError(LOGREF_ERROR, ex.getMessage());
+        return new VndError(String.valueOf(ErrorDef.UNKNOWN_REQUEST_PARAMETER_EXCEPTION.getValue()), ex.getMessage());
     }
 }

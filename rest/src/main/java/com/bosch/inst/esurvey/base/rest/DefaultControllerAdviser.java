@@ -1,5 +1,6 @@
 package com.bosch.inst.esurvey.base.rest;
 
+import com.bosch.inst.esurvey.base.rest.entity.ErrorDef;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.core.annotation.Order;
@@ -56,6 +57,6 @@ public class DefaultControllerAdviser extends ResponseEntityExceptionHandler {
                 (ex.getClass(), ResponseStatus.class) != null) {
             throw ex;
         }
-        return new VndErrors.VndError(LOGREF_ERROR, ex.getMessage());
+        return new VndErrors.VndError(String.valueOf(ErrorDef.UNKNOWN_EXCEPTION.getValue()), ex.getMessage());
     }
 }

@@ -12,6 +12,8 @@ public enum ErrorDef {
     ILLEGAL_ARGUMENT_EXCEPTION(10002, "Illegal Argument Exception"),
     NUMBER_FORMAT_EXCEPTION(10003, "Number Format Exception"),
     ILLEGAL_STATE_EXCEPTION(10004, "Illegal State Exception"),
+    DATA_INTEGRITY_VIOLATION_EXCEPTION(10005, "Data Integrity Violation Exception"),
+    UNKNOWN_REQUEST_PARAMETER_EXCEPTION(10006, "Unknown Request Parameter Exception"),
     ;
 
     private final int value;
