@@ -1,4 +1,4 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.bosch.inst.esurvey.base.querydsl.web.QueryDslPLCSConfiguration,\
-com.bosch.inst.esurvey.base.querydsl.web.SortConfiguration,\
-com.bosch.inst.esurvey.base.querydsl.web.QueryDslPLCSControllerAdviser
+com.bosch.inst.base.querydsl.web.QueryDslPLCSConfiguration,\
+com.bosch.inst.base.querydsl.web.SortConfiguration,\
+com.bosch.inst.base.querydsl.web.QueryDslPLCSControllerAdviser

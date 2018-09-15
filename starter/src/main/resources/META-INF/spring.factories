@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.bosch.inst.esurvey.base.logging.HealthMetricsConfiguration
+  com.bosch.inst.base.logging.HealthMetricsConfiguration

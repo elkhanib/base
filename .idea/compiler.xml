@@ -11,6 +11,7 @@
         <module name="base-querydsl" />
         <module name="base-rest" />
         <module name="base-security" />
+        <module name="base-starter" />
       </profile>
     </annotationProcessing>
   </component>

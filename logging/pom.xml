@@ -4,13 +4,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.bosch.inst.esurvey</groupId>
+    <groupId>com.bosch.inst</groupId>
     <artifactId>base-logging</artifactId>
     <packaging>jar</packaging>
     <name>base :: logging</name>
 
     <parent>
-        <groupId>com.bosch.inst.esurvey</groupId>
+        <groupId>com.bosch.inst</groupId>
         <artifactId>base</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>

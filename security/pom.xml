@@ -6,12 +6,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <packaging>jar</packaging>
-    <groupId>com.bosch.inst.esurvey</groupId>
+    <groupId>com.bosch.inst</groupId>
     <artifactId>base-security</artifactId>
     <name>base :: security</name>
 
     <parent>
-        <groupId>com.bosch.inst.esurvey</groupId>
+        <groupId>com.bosch.inst</groupId>
         <artifactId>base</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
