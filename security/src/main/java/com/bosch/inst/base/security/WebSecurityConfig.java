@@ -29,7 +29,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/api/v1/car-ads-account/user/password/reset", "/api/v1/car-ads-account/register").permitAll()
+        http.authorizeRequests().antMatchers("/", "/csrf", "/swagger-ui.html", "/webjars/springfox-swagger-ui/**", "/swagger-resources/**", "/v2/api-docs").permitAll()
                 .anyRequest().authenticated();
 
 
