@@ -19,6 +19,7 @@ class DslConverters {
         converters.put(String.class, new NamedConverter<>(DslDocumentation.Types.STRING, source -> source));
         converters.put(Boolean.class, new NamedConverter<>(DslDocumentation.Types.BOOLEAN, source -> conversionService.convert(source, Boolean.class)));
         converters.put(Integer.class, new NamedConverter<>(DslDocumentation.Types.INTEGER, source -> conversionService.convert(source, Integer.class)));
+        converters.put(Long.class, new NamedConverter<>(DslDocumentation.Types.LONG, source -> conversionService.convert(source, Long.class)));
         converters.put(Float.class, new NamedConverter<>(DslDocumentation.Types.FLOAT, source -> conversionService.convert(source, Float.class)));
         converters.put(Instant.class, new NamedConverter<>(DslDocumentation.Types.TIMESTAMP, source -> conversionService.convert(source, Instant.class)));
     }
