@@ -32,11 +32,10 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
         String cookieToken = getCookieValue(request, jwtHeader);
 
         String token = "";
-
-        if (headerToken != null) {
-            token = request.getHeader(jwtHeader);
-        } else if (cookieToken != null) {
+        if (cookieToken != null) {
             token = getCookieValue(request, jwtHeader);
+        } else if (headerToken != null) {
+            token = request.getHeader(jwtHeader);
         } else {
             chain.doFilter(request, response);
             return;
