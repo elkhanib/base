@@ -26,7 +26,7 @@ public class CookieAuthenticationProcessingFilter extends BaseAuthenticationProc
 
     private static final Logger LOG = LoggerFactory.getLogger(CookieAuthenticationProcessingFilter.class);
 
-    private AuthProperties authProperties;
+    private AuthProperties properties;
 
     private String cookieName;
 
@@ -34,7 +34,7 @@ public class CookieAuthenticationProcessingFilter extends BaseAuthenticationProc
 
     public CookieAuthenticationProcessingFilter(String defaultFilterProcessesUrl, AuthProperties authProperties, String jwtSecret) {
         super(defaultFilterProcessesUrl);
-        this.authProperties = authProperties;
+        this.properties = authProperties;
         this.cookieName = authProperties.getCookie().getName();
         this.jwtSecret = jwtSecret;
     }
@@ -84,10 +84,10 @@ public class CookieAuthenticationProcessingFilter extends BaseAuthenticationProc
 
     private Cookie getLogoutCookie() {
         Cookie cookie = new Cookie(cookieName, null);
-        Optional.ofNullable(authProperties.getCookie().getHttpOnly()).ifPresent(cookie::setHttpOnly);
-        Optional.ofNullable(authProperties.getCookie().getDomain()).ifPresent(cookie::setDomain);
-        Optional.ofNullable(authProperties.getCookie().getPath()).ifPresent(cookie::setPath);
-        Optional.ofNullable(authProperties.getCookie().getSecure()).ifPresent(cookie::setSecure);
+        Optional.ofNullable(properties.getCookie().getHttpOnly()).ifPresent(cookie::setHttpOnly);
+        Optional.ofNullable(properties.getCookie().getDomain()).ifPresent(cookie::setDomain);
+        Optional.ofNullable(properties.getCookie().getPath()).ifPresent(cookie::setPath);
+        Optional.ofNullable(properties.getCookie().getSecure()).ifPresent(cookie::setSecure);
         cookie.setMaxAge(0);
         return cookie;
     }
