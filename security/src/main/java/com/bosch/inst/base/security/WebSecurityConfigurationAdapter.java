@@ -1,19 +1,18 @@
 package com.bosch.inst.base.security;
 
-import com.bosch.inst.base.security.service.IUserService;
+import com.bosch.inst.base.security.authorization.AuthProperties;
+import com.bosch.inst.base.security.filter.JwtLoginFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
 
 @Configuration
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfigurationAdapter extends ImWebSecurityConfigurerAdapter {
     @Value("${jwt.header:X-Access-Token}")
     public String JWT_HEADER;
 
@@ -24,7 +23,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public Long JWT_EXPIRE;
 
     @Autowired
-    private IUserService userService;
+    private AuthProperties authProperties;
 
 
     @Override
@@ -33,12 +32,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated();
 
 
-        http.addFilter(new JWTLoginFilter(authenticationManager(), JWT_HEADER, JWT_SECRET, JWT_EXPIRE));
-        http.addFilter(new JWTAuthenticationFilter(authenticationManager(), JWT_HEADER, JWT_SECRET));
+        http.addFilter(new JwtLoginFilter(JWT_HEADER, JWT_SECRET, JWT_EXPIRE, authProperties.getCookie().getName(), authenticationManager()));
+//        http.addFilter(new JWTAuthenticationFilter(authenticationManager(), JWT_HEADER, JWT_SECRET));
 
+        // Don't use sessions for stateless REST interfaces
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+//        http.addFilterBefore(new EnforceSecureLoginFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(getTokenAuthFilter("/**", JWT_SECRET), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(getBasicAuthFilter("/**"), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(getCookieAuthFilter("/**", JWT_SECRET), UsernamePasswordAuthenticationFilter.class);
+//        http.addFilterBefore(getJwtTokenAuthFilter("/**", JWT_TOKEN, JWT_SECRET), UsernamePasswordAuthenticationFilter.class);
+//        http.addFilterBefore(new XRequestedHeaderFilter(properties), UsernamePasswordAuthenticationFilter.class);
 
         http.logout()
-                .deleteCookies(JWT_HEADER)
+                .deleteCookies(authProperties.getCookie().getName())
+//                .deleteCookies(JWT_TOKEN)
                 .logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler(HttpStatus.OK));
 
         // Return the 'WWW-Authenticate: Basic' header in case of missing credentials
@@ -53,9 +62,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
     }
 
-    @Override
-    public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-        auth.userDetailsService(userService).passwordEncoder(encoder);
-    }
 }

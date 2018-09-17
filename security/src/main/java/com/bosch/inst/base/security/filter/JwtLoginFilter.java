@@ -1,8 +1,11 @@
-package com.bosch.inst.base.security;
+package com.bosch.inst.base.security.filter;
 
+import com.bosch.inst.base.security.authorization.JwtUser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -19,18 +22,23 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
+public class JwtLoginFilter extends UsernamePasswordAuthenticationFilter {
+    private static final Logger LOG = LoggerFactory.getLogger(JwtLoginFilter.class);
+
     private String jwtHeader;
     private String jwtSecret;
     private Long jwtExpire;
+    private String cookieName;
 
     private AuthenticationManager authenticationManager;
 
-    public JWTLoginFilter(AuthenticationManager authenticationManager, String jwtHeader, String jwtSecret, Long jwtExpire) {
-        this.authenticationManager = authenticationManager;
+
+    public JwtLoginFilter(String jwtHeader, String jwtSecret, Long jwtExpire, String cookieName, AuthenticationManager authenticationManager) {
         this.jwtHeader = jwtHeader;
         this.jwtSecret = jwtSecret;
         this.jwtExpire = jwtExpire;
+        this.cookieName = cookieName;
+        this.authenticationManager = authenticationManager;
     }
 
     // 接收并解析用户凭证
@@ -38,8 +46,8 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
     public Authentication attemptAuthentication(HttpServletRequest req,
                                                 HttpServletResponse res) throws AuthenticationException {
         try {
-            JWTUser user = new ObjectMapper()
-                    .readValue(req.getInputStream(), JWTUser.class);
+            JwtUser user = new ObjectMapper()
+                    .readValue(req.getInputStream(), JwtUser.class);
 
             return authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
@@ -69,7 +77,7 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
 
         //构造Cookie对象
         //添加到Cookie中
-        Cookie c = new Cookie(jwtHeader, token);
+        Cookie c = new Cookie(cookieName, token);
         //设置过期时间
         c.setMaxAge(jwtExpire.intValue());
         //存储

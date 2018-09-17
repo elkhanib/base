@@ -1,9 +1,9 @@
-package com.bosch.inst.base.security;
+package com.bosch.inst.base.security.authorization;
 
 import lombok.Data;
 
 @Data
-public class JWTUser {
+public class JwtUser {
     private String password;
     private final String username;
 }
