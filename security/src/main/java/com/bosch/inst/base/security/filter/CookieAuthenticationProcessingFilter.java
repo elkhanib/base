@@ -1,11 +1,10 @@
 package com.bosch.inst.base.security.filter;
 
 import com.bosch.inst.base.security.authorization.AuthProperties;
+import com.bosch.inst.base.security.authorization.StringAuthorizationToken;
 import com.bosch.inst.base.security.configuration.ExpiredTokenException;
-import io.jsonwebtoken.Jwts;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.util.StringUtils;
 
@@ -14,7 +13,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Optional;
 
@@ -30,13 +28,11 @@ public class CookieAuthenticationProcessingFilter extends BaseAuthenticationProc
 
     private String cookieName;
 
-    private String jwtSecret;
 
-    public CookieAuthenticationProcessingFilter(String defaultFilterProcessesUrl, AuthProperties authProperties, String jwtSecret) {
+    public CookieAuthenticationProcessingFilter(String defaultFilterProcessesUrl, AuthProperties authProperties) {
         super(defaultFilterProcessesUrl);
         this.properties = authProperties;
         this.cookieName = authProperties.getCookie().getName();
-        this.jwtSecret = jwtSecret;
     }
 
     @Override
@@ -56,30 +52,13 @@ public class CookieAuthenticationProcessingFilter extends BaseAuthenticationProc
         }
 
         try {
-//            return this.getAuthenticationManager().authenticate(new StringAuthorizationToken(cookie.getValue()));
-            return getAuthentication(request, cookie.getValue());
+            return this.getAuthenticationManager().authenticate(new StringAuthorizationToken(cookie.getValue()));
+//            return getAuthentication(request, cookie.getValue());
         } catch (ExpiredTokenException | IllegalArgumentException e) {
             LOG.debug("Cookie Authentication failed", e);
             response.addCookie(getLogoutCookie());
             return getAnonymous();
         }
-    }
-
-    private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request, String token) {
-        if (token != null) {
-            // parse the token.
-            String user = Jwts.parser()
-                    .setSigningKey(jwtSecret)
-                    .parseClaimsJws(token)
-                    .getBody()
-                    .getSubject();
-
-            if (user != null) {
-                return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
-            }
-            return null;
-        }
-        return null;
     }
 
     private Cookie getLogoutCookie() {

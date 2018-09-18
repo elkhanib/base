@@ -1,6 +1,6 @@
 package com.bosch.inst.base.security.service.impl;
 
-import com.bosch.inst.base.security.service.IUserService;
+import com.bosch.inst.base.security.service.IUserProviderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -17,7 +17,7 @@ import java.util.List;
 
 @Service
 @Slf4j
-public class UserServiceImpl implements IUserService {
+public class UserProviderServiceImpl implements IUserProviderService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -25,7 +25,7 @@ public class UserServiceImpl implements IUserService {
 
         PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 
-        System.err.println(encoder.encode(username));
+        log.info("Password: " + encoder.encode(username));
         List<String> roles = new ArrayList<>();
 
         return new User(username, encoder.encode(username), createAuthorityList(roles));

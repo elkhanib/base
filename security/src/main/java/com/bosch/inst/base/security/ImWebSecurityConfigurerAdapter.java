@@ -4,12 +4,11 @@ import com.bosch.inst.base.security.authorization.AuthProperties;
 import com.bosch.inst.base.security.filter.BasicAuthenticationProcessingFilter;
 import com.bosch.inst.base.security.filter.CookieAuthenticationProcessingFilter;
 import com.bosch.inst.base.security.filter.TokenAuthenticationProcessingFilter;
-import com.bosch.inst.base.security.service.IUserService;
+import com.bosch.inst.base.security.service.IUserProviderService;
+import com.bosch.inst.base.security.service.ImAuthenticationProviderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
  * Can be used to create an own WebSecurityConfigurerAdapter that is pre-configured
@@ -17,15 +16,20 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  */
 public abstract class ImWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
     @Autowired
-    private IUserService userService;
+    private IUserProviderService userService;
 
     @Autowired
     private AuthProperties authProperties;
 
+    @Autowired
+    private ImAuthenticationProviderService authenticationProviderService;
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-        auth.userDetailsService(userService).passwordEncoder(encoder);
+//        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+//        auth.userDetailsService(userService).passwordEncoder(encoder);
+
+        auth.authenticationProvider(authenticationProviderService);
     }
 
     protected BasicAuthenticationProcessingFilter getBasicAuthFilter(String defaultFilterProcessesUrl) throws Exception {
@@ -35,18 +39,18 @@ public abstract class ImWebSecurityConfigurerAdapter extends WebSecurityConfigur
         return filter;
     }
 
-    protected TokenAuthenticationProcessingFilter getTokenAuthFilter(String defaultFilterProcessesUrl, String jwtSecret) throws
+    protected TokenAuthenticationProcessingFilter getTokenAuthFilter(String defaultFilterProcessesUrl) throws
             Exception {
         TokenAuthenticationProcessingFilter filter = new
-                TokenAuthenticationProcessingFilter(defaultFilterProcessesUrl, jwtSecret);
+                TokenAuthenticationProcessingFilter(defaultFilterProcessesUrl);
         filter.setAuthenticationManager(this.authenticationManager());
         return filter;
     }
 
-    protected CookieAuthenticationProcessingFilter getCookieAuthFilter(String defaultFilterProcessesUrl, String jwtSecret) throws
+    protected CookieAuthenticationProcessingFilter getCookieAuthFilter(String defaultFilterProcessesUrl) throws
             Exception {
         CookieAuthenticationProcessingFilter filter = new
-                CookieAuthenticationProcessingFilter(defaultFilterProcessesUrl, authProperties, jwtSecret);
+                CookieAuthenticationProcessingFilter(defaultFilterProcessesUrl, authProperties);
         filter.setAuthenticationManager(this.authenticationManager());
         return filter;
     }
