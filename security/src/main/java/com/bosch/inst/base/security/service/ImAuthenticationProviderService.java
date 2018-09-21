@@ -30,7 +30,7 @@ public class ImAuthenticationProviderService implements AuthenticationProvider {
     private String defaultRolePrefix = "ROLE_";
 
     @Autowired
-    private IUserProviderService userService;
+    private IUserProviderService userProviderService;
 
     @Autowired
     private JwtProperties jwtProperties;
@@ -82,7 +82,7 @@ public class ImAuthenticationProviderService implements AuthenticationProvider {
 
     private Authentication authenticateWithPermissions(String username, String password) {
         try {
-            UserDetails userDetails = this.userService.loadUserByUsername(username);
+            UserDetails userDetails = this.userProviderService.loadUserByUsername(username);
             return new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
 
         } catch (Exception e) {

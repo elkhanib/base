@@ -4,7 +4,6 @@ import com.bosch.inst.base.security.authorization.AuthProperties;
 import com.bosch.inst.base.security.filter.BasicAuthenticationProcessingFilter;
 import com.bosch.inst.base.security.filter.CookieAuthenticationProcessingFilter;
 import com.bosch.inst.base.security.filter.TokenAuthenticationProcessingFilter;
-import com.bosch.inst.base.security.service.IUserProviderService;
 import com.bosch.inst.base.security.service.ImAuthenticationProviderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -15,9 +14,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
  * with the ImAuthenticationProviderService and provides some methods for easier filter configuration.
  */
 public abstract class ImWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
-    @Autowired
-    private IUserProviderService userService;
-
     @Autowired
     private AuthProperties authProperties;
 
