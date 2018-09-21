@@ -2,6 +2,7 @@ package com.bosch.inst.base.security;
 
 import com.bosch.inst.base.security.authorization.AuthProperties;
 import com.bosch.inst.base.security.authorization.JwtProperties;
+import com.bosch.inst.base.security.filter.CorsFilter;
 import com.bosch.inst.base.security.filter.JwtLoginFilter;
 import com.bosch.inst.base.security.filter.XRequestedHeaderFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,6 @@ public class WebSecurityConfigurationAdapter extends ImWebSecurityConfigurerAdap
     @Autowired
     private JwtProperties jwtProperties;
 
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers("/", "/csrf", "/swagger-ui.html", "/webjars/springfox-swagger-ui/**", "/swagger-resources/**", "/v2/api-docs").permitAll()
@@ -32,7 +32,9 @@ public class WebSecurityConfigurationAdapter extends ImWebSecurityConfigurerAdap
         // Don't use sessions for stateless REST interfaces
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-//        http.addFilterBefore(new EnforceSecureLoginFilter(), UsernamePasswordAuthenticationFilter.class);
+        // http.addFilterBefore(new EnforceSecureLoginFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(new CorsFilter(), UsernamePasswordAuthenticationFilter.class);
+
         http.addFilterBefore(getTokenAuthFilter("/**"), UsernamePasswordAuthenticationFilter.class);
         http.addFilterBefore(getBasicAuthFilter("/**"), UsernamePasswordAuthenticationFilter.class);
         http.addFilterBefore(getCookieAuthFilter("/**"), UsernamePasswordAuthenticationFilter.class);
