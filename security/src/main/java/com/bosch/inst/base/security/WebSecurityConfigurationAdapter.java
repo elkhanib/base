@@ -1,7 +1,7 @@
 package com.bosch.inst.base.security;
 
-import com.bosch.inst.base.security.authorization.AuthProperties;
-import com.bosch.inst.base.security.authorization.JwtProperties;
+import com.bosch.inst.base.security.auth.AuthProperties;
+import com.bosch.inst.base.security.auth.JwtProperties;
 import com.bosch.inst.base.security.filter.CorsFilter;
 import com.bosch.inst.base.security.filter.JwtLoginFilter;
 import com.bosch.inst.base.security.filter.XRequestedHeaderFilter;

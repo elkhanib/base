@@ -1,4 +1,4 @@
-package com.bosch.inst.base.security.authorization;
+package com.bosch.inst.base.security.auth;
 
 import java.time.Instant;
 import java.util.Map;

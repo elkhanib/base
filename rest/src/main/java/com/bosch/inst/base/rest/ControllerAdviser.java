@@ -86,5 +86,4 @@ public class ControllerAdviser extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(apiError, HttpStatus.CONFLICT);
 //        return new ResponseEntity<Object>(String.valueOf(ApiErrorDef.DATA_INTEGRITY_VIOLATION_EXCEPTION.getValue()), ex.getMessage());
     }
-
 }

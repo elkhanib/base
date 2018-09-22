@@ -1,4 +1,4 @@
-package com.bosch.inst.base.security.configuration;
+package com.bosch.inst.base.security.config;
 
 
 import java.time.Instant;

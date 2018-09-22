@@ -1,6 +1,6 @@
 package com.bosch.inst.base.security.filter;
 
-import com.bosch.inst.base.security.configuration.ExpiredTokenException;
+import com.bosch.inst.base.security.config.ExpiredTokenException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.BadCredentialsException;

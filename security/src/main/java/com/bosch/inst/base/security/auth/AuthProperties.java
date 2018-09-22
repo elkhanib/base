@@ -1,4 +1,4 @@
-package com.bosch.inst.base.security.authorization;
+package com.bosch.inst.base.security.auth;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -6,7 +6,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class AuthProperties {
 
     /**
-     * Cookie configuration
+     * Cookie config
      */
     private Cookie cookie = new Cookie();
 

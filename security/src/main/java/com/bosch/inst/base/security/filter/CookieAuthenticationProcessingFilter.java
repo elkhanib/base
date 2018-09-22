@@ -1,8 +1,8 @@
 package com.bosch.inst.base.security.filter;
 
-import com.bosch.inst.base.security.authorization.AuthProperties;
-import com.bosch.inst.base.security.authorization.StringAuthorizationToken;
-import com.bosch.inst.base.security.configuration.ExpiredTokenException;
+import com.bosch.inst.base.security.auth.AuthProperties;
+import com.bosch.inst.base.security.auth.StringAuthorizationToken;
+import com.bosch.inst.base.security.config.ExpiredTokenException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;

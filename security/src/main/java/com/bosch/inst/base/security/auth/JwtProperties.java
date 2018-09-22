@@ -1,4 +1,4 @@
-package com.bosch.inst.base.security.authorization;
+package com.bosch.inst.base.security.auth;
 
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;

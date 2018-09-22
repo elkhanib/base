@@ -2,6 +2,7 @@ package com.bosch.inst.base.rest.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.springframework.http.HttpStatus;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
@@ -17,6 +18,14 @@ public class ApiError {
 
     public ApiError() {
         timestamp = LocalDateTime.now();
+    }
+
+    public ApiError(HttpStatus status, HttpServletRequest request, Throwable ex) {
+        this();
+        this.code = status.value();
+        this.error = status.getReasonPhrase();
+        this.message = ex.toString();
+        this.path = request.getRequestURI();
     }
 
 

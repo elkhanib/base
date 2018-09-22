@@ -1,6 +1,6 @@
 package com.bosch.inst.base.security.filter;
 
-import com.bosch.inst.base.security.authorization.AuthProperties;
+import com.bosch.inst.base.security.auth.AuthProperties;
 import org.springframework.web.filter.GenericFilterBean;
 
 import javax.servlet.FilterChain;

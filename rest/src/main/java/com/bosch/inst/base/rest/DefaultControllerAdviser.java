@@ -1,7 +1,6 @@
 package com.bosch.inst.base.rest;
 
 import com.bosch.inst.base.rest.entity.ApiError;
-import com.bosch.inst.base.rest.entity.ApiErrorDef;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.core.annotation.Order;
@@ -60,8 +59,7 @@ public class DefaultControllerAdviser extends ResponseEntityExceptionHandler {
                 (ex.getClass(), ResponseStatus.class) != null) {
             throw ex;
         }
-//        return new VndErrors.VndError(String.valueOf(ApiErrorDef.UNKNOWN_EXCEPTION.getValue()), ex.getMessage());
-        ApiError apiError = new ApiError(ApiErrorDef.UNKNOWN_EXCEPTION, request, ex);
+        ApiError apiError = new ApiError(HttpStatus.INTERNAL_SERVER_ERROR, request, ex);
         return new ResponseEntity<>(apiError, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

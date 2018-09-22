@@ -1,5 +1,5 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.bosch.inst.base.security.authorization.AuthProperties,\
-  com.bosch.inst.base.security.authorization.JwtProperties,\
-  com.bosch.inst.base.security.service.ImAuthenticationProviderService,\
+  com.bosch.inst.base.security.auth.AuthProperties,\
+  com.bosch.inst.base.security.auth.JwtProperties,\
+  com.bosch.inst.base.security.auth.AuthProvider,\
   com.bosch.inst.base.security.WebSecurityConfigurationAdapter

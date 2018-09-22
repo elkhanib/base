@@ -1,4 +1,4 @@
-package com.bosch.inst.base.security.authorization;
+package com.bosch.inst.base.security.auth;
 
 import java.util.Map;
 import java.util.Optional;
@@ -55,7 +55,7 @@ public interface IAuthorizationToken extends IJsonWebToken {
 
     /**
      * Returns a set which contains all claims which are contained in this token which might be relevant for
-     * authorization checks.
+     * auth checks.
      *
      * @return a set which contains all claims which are contained in this token
      */

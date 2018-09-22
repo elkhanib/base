@@ -1,19 +1,22 @@
-package com.bosch.inst.base.security.authorization;
+package com.bosch.inst.base.security.auth;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Collection;
 
-public class PermissionsAuthorizationToken implements Authentication {
-    private transient IAuthorizationToken authorizationToken;
+/**
+ * Represents an Authentication that is only known as string.
+ */
+public class StringAuthorizationToken implements Authentication {
+    private transient String authorizationToken;
     private transient Collection<GrantedAuthority> authorities;
 
-    public PermissionsAuthorizationToken(IAuthorizationToken authorizationToken) {
+    public StringAuthorizationToken(String authorizationToken) {
         this.authorizationToken = authorizationToken;
     }
 
-    public PermissionsAuthorizationToken(IAuthorizationToken authorizationToken, Collection<GrantedAuthority> authorities) {
+    public StringAuthorizationToken(String authorizationToken, Collection<GrantedAuthority> authorities) {
         this.authorizationToken = authorizationToken;
         this.authorities = authorities;
     }
@@ -25,17 +28,17 @@ public class PermissionsAuthorizationToken implements Authentication {
 
     @Override
     public String getCredentials() {
-        return authorizationToken.getJwt();
-    }
-
-    @Override
-    public IAuthorizationToken getDetails() {
         return authorizationToken;
     }
 
     @Override
+    public IAuthorizationToken getDetails() {
+        return null;
+    }
+
+    @Override
     public String getPrincipal() {
-        return authorizationToken.getUserId();
+        return null;
     }
 
     @Override
@@ -44,12 +47,12 @@ public class PermissionsAuthorizationToken implements Authentication {
     }
 
     @Override
-    public void setAuthenticated(boolean b) {
+    public void setAuthenticated(boolean b) throws IllegalArgumentException {
         throw new IllegalArgumentException();
     }
 
     @Override
     public String getName() {
-        return authorizationToken.getAudience();
+        return null;
     }
 }

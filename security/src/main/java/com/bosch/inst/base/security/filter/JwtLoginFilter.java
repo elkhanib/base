@@ -1,6 +1,6 @@
 package com.bosch.inst.base.security.filter;
 
-import com.bosch.inst.base.security.authorization.JwtUser;
+import com.bosch.inst.base.security.auth.JwtUser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

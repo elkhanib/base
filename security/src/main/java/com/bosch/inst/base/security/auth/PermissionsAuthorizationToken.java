@@ -1,22 +1,19 @@
-package com.bosch.inst.base.security.authorization;
+package com.bosch.inst.base.security.auth;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Collection;
 
-/**
- * Represents an Authentication that is only known as string.
- */
-public class StringAuthorizationToken implements Authentication {
-    private transient String authorizationToken;
+public class PermissionsAuthorizationToken implements Authentication {
+    private transient IAuthorizationToken authorizationToken;
     private transient Collection<GrantedAuthority> authorities;
 
-    public StringAuthorizationToken(String authorizationToken) {
+    public PermissionsAuthorizationToken(IAuthorizationToken authorizationToken) {
         this.authorizationToken = authorizationToken;
     }
 
-    public StringAuthorizationToken(String authorizationToken, Collection<GrantedAuthority> authorities) {
+    public PermissionsAuthorizationToken(IAuthorizationToken authorizationToken, Collection<GrantedAuthority> authorities) {
         this.authorizationToken = authorizationToken;
         this.authorities = authorities;
     }
@@ -28,17 +25,17 @@ public class StringAuthorizationToken implements Authentication {
 
     @Override
     public String getCredentials() {
-        return authorizationToken;
+        return authorizationToken.getJwt();
     }
 
     @Override
     public IAuthorizationToken getDetails() {
-        return null;
+        return authorizationToken;
     }
 
     @Override
     public String getPrincipal() {
-        return null;
+        return authorizationToken.getUserId();
     }
 
     @Override
@@ -47,12 +44,12 @@ public class StringAuthorizationToken implements Authentication {
     }
 
     @Override
-    public void setAuthenticated(boolean b) throws IllegalArgumentException {
+    public void setAuthenticated(boolean b) {
         throw new IllegalArgumentException();
     }
 
     @Override
     public String getName() {
-        return null;
+        return authorizationToken.getAudience();
     }
 }

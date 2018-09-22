@@ -1,4 +1,4 @@
-package com.bosch.inst.base.security.authorization;
+package com.bosch.inst.base.security.auth;
 
 /**
  * Defines all possible claims which are defined by Service API 2 and which are not part of the specification which can
