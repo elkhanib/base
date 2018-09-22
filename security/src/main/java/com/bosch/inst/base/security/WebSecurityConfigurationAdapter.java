@@ -1,6 +1,6 @@
 package com.bosch.inst.base.security;
 
-import com.bosch.inst.base.security.auth.AuthProperties;
+import com.bosch.inst.base.security.auth.AuthenticationProperties;
 import com.bosch.inst.base.security.auth.JwtProperties;
 import com.bosch.inst.base.security.filter.CorsFilter;
 import com.bosch.inst.base.security.filter.JwtLoginFilter;
@@ -14,9 +14,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
 
 @Configuration
-public class WebSecurityConfigurationAdapter extends ImWebSecurityConfigurerAdapter {
+public class WebSecurityConfigurationAdapter extends AbstractWebSecurityConfigurerAdapter {
     @Autowired
-    private AuthProperties authProperties;
+    private AuthenticationProperties authProperties;
 
     @Autowired
     private JwtProperties jwtProperties;
@@ -27,7 +27,7 @@ public class WebSecurityConfigurationAdapter extends ImWebSecurityConfigurerAdap
                 .anyRequest().authenticated();
 
 
-        http.addFilter(new JwtLoginFilter(jwtProperties.getHeader(), jwtProperties.getSecret(), jwtProperties.getExpire(), authProperties.getCookie().getName(), authenticationManager()));
+        http.addFilter(new JwtLoginFilter(jwtProperties, authProperties, authenticationManager()));
 
         // Don't use sessions for stateless REST interfaces
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

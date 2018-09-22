@@ -1,6 +1,6 @@
 package com.bosch.inst.base.security.filter;
 
-import com.bosch.inst.base.security.auth.AuthProperties;
+import com.bosch.inst.base.security.auth.AuthenticationProperties;
 import com.bosch.inst.base.security.auth.StringAuthorizationToken;
 import com.bosch.inst.base.security.config.ExpiredTokenException;
 import org.slf4j.Logger;
@@ -24,15 +24,15 @@ public class CookieAuthenticationProcessingFilter extends BaseAuthenticationProc
 
     private static final Logger LOG = LoggerFactory.getLogger(CookieAuthenticationProcessingFilter.class);
 
-    private AuthProperties properties;
+    private AuthenticationProperties properties;
 
     private String cookieName;
 
 
-    public CookieAuthenticationProcessingFilter(String defaultFilterProcessesUrl, AuthProperties authProperties) {
+    public CookieAuthenticationProcessingFilter(String defaultFilterProcessesUrl, AuthenticationProperties properties) {
         super(defaultFilterProcessesUrl);
-        this.properties = authProperties;
-        this.cookieName = authProperties.getCookie().getName();
+        this.properties = properties;
+        this.cookieName = properties.getCookie().getName();
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.bosch.inst.base.security.filter;
 
+import com.bosch.inst.base.security.auth.AuthenticationProperties;
+import com.bosch.inst.base.security.auth.JwtProperties;
 import com.bosch.inst.base.security.auth.JwtUser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
@@ -25,19 +27,14 @@ import java.util.Date;
 public class JwtLoginFilter extends UsernamePasswordAuthenticationFilter {
     private static final Logger LOG = LoggerFactory.getLogger(JwtLoginFilter.class);
 
-    private String jwtHeader;
-    private String jwtSecret;
-    private Long jwtExpire;
-    private String cookieName;
-
+    private JwtProperties jwtProperties;
+    private AuthenticationProperties authProperties;
     private AuthenticationManager authenticationManager;
 
 
-    public JwtLoginFilter(String jwtHeader, String jwtSecret, Long jwtExpire, String cookieName, AuthenticationManager authenticationManager) {
-        this.jwtHeader = jwtHeader;
-        this.jwtSecret = jwtSecret;
-        this.jwtExpire = jwtExpire;
-        this.cookieName = cookieName;
+    public JwtLoginFilter(JwtProperties jwtProperties, AuthenticationProperties authProperties, AuthenticationManager authenticationManager) {
+        this.jwtProperties = jwtProperties;
+        this.authProperties = authProperties;
         this.authenticationManager = authenticationManager;
     }
 
@@ -70,16 +67,16 @@ public class JwtLoginFilter extends UsernamePasswordAuthenticationFilter {
         String token = Jwts.builder()
                 .setSubject(((User) auth.getPrincipal()).getUsername())
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + jwtExpire))
-                .signWith(SignatureAlgorithm.HS512, jwtSecret)
+                .setExpiration(new Date(System.currentTimeMillis() + jwtProperties.getExpire()))
+                .signWith(SignatureAlgorithm.HS512, jwtProperties.getSecret())
                 .compact();
-        res.addHeader(jwtHeader, token);
+        res.addHeader(jwtProperties.getHeader(), token);
 
         //构造Cookie对象
         //添加到Cookie中
-        Cookie c = new Cookie(cookieName, token);
+        Cookie c = new Cookie(authProperties.getCookie().getName(), token);
         //设置过期时间
-        c.setMaxAge(jwtExpire.intValue());
+        c.setMaxAge(authProperties.getCookie().getMaxAge());
         //存储
         res.addCookie(c);
     }

@@ -1,6 +1,6 @@
 package com.bosch.inst.base.security.filter;
 
-import com.bosch.inst.base.security.auth.AuthProperties;
+import com.bosch.inst.base.security.auth.AuthenticationProperties;
 import org.springframework.web.filter.GenericFilterBean;
 
 import javax.servlet.FilterChain;
@@ -31,8 +31,8 @@ public class XRequestedHeaderFilter extends GenericFilterBean {
     private static final String METHOD_GET = "GET";
     private String cookieName;
 
-    public XRequestedHeaderFilter(AuthProperties authProperties) {
-        cookieName = authProperties.getCookie().getName();
+    public XRequestedHeaderFilter(AuthenticationProperties properties) {
+        cookieName = properties.getCookie().getName();
     }
 
     @Override

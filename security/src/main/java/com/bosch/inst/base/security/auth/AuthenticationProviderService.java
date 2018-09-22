@@ -21,7 +21,7 @@ import java.util.Set;
  */
 @Service
 @Slf4j
-public class AuthProvider implements AuthenticationProvider {
+public class AuthenticationProviderService implements AuthenticationProvider {
 
     private static final String CREDENTIALS_ERROR = "Invalid credentials";
 
@@ -37,7 +37,7 @@ public class AuthProvider implements AuthenticationProvider {
     private JwtProperties jwtProperties;
 
     @Autowired
-    public AuthProvider() {
+    public AuthenticationProviderService() {
         supportedAuth.add(StringAuthorizationToken.class);
         supportedAuth.add(UsernamePasswordAuthenticationToken.class);
     }
