@@ -77,12 +77,13 @@ public class AuthenticationProviderService implements AuthenticationProvider {
         try { // parse the token.
             return getAuthentication(authorizationTokenString);
         } catch (Exception e) {
+            log.warn(e.getLocalizedMessage());
             throw new BadCredentialsException(e.getMessage(), e);
         }
     }
 
     private Authentication authenticateWithPermissions(String username, String password) {
-        try {// authenticate the username and password.
+        try { // authenticate the username and password.
             return getAuthentication(username, password);
         } catch (Exception e) {
             log.warn("User {} found but password does not match!", username);
@@ -91,27 +92,17 @@ public class AuthenticationProviderService implements AuthenticationProvider {
     }
 
     private UsernamePasswordAuthenticationToken getAuthentication(String username, String password) {
-        try {
-            UserDetails userDetails = userProviderService.authenticate(username, password);
-            return new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
-        } catch (Exception e) {
-            log.warn(e.getLocalizedMessage());
-            throw new BadCredentialsException(CREDENTIALS_ERROR, e);
-        }
+        UserDetails userDetails = userProviderService.authenticate(username, password);
+        return new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
     }
 
     private UsernamePasswordAuthenticationToken getAuthentication(String token) {
-        try {
-            // parse the token.
-            String user = Jwts.parser()
-                    .setSigningKey(jwtProperties.getSecret())
-                    .parseClaimsJws(token)
-                    .getBody()
-                    .getSubject();
-            return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
-        } catch (Exception e) {
-            log.warn(e.getLocalizedMessage());
-            throw new BadCredentialsException(CREDENTIALS_ERROR, e);
-        }
+        // parse the token.
+        String user = Jwts.parser()
+                .setSigningKey(jwtProperties.getSecret())
+                .parseClaimsJws(token)
+                .getBody()
+                .getSubject();
+        return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
     }
 }
