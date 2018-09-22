@@ -1,6 +1,7 @@
 package com.bosch.inst.base.rest;
 
-import com.bosch.inst.base.rest.entity.ErrorDef;
+import com.bosch.inst.base.rest.entity.ApiError;
+import com.bosch.inst.base.rest.entity.ApiErrorDef;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.core.annotation.Order;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * The DefaultControllerAdvicer is an Advicer which extends the {@link ResponseEntityExceptionHandler}
@@ -49,7 +52,7 @@ public class DefaultControllerAdviser extends ResponseEntityExceptionHandler {
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @SuppressWarnings("squid:S00112")
-    VndErrors.VndError exceptionHandler(Exception ex) throws Exception {
+    ResponseEntity<Object> exceptionHandler(HttpServletRequest request, Exception ex) throws Exception {
         log.error(ex.getLocalizedMessage(), ex);
         // If the exception is annotated with @ResponseStatus rethrow it and let
         // the framework handle it
@@ -57,6 +60,8 @@ public class DefaultControllerAdviser extends ResponseEntityExceptionHandler {
                 (ex.getClass(), ResponseStatus.class) != null) {
             throw ex;
         }
-        return new VndErrors.VndError(String.valueOf(ErrorDef.UNKNOWN_EXCEPTION.getValue()), ex.getMessage());
+//        return new VndErrors.VndError(String.valueOf(ApiErrorDef.UNKNOWN_EXCEPTION.getValue()), ex.getMessage());
+        ApiError apiError = new ApiError(ApiErrorDef.UNKNOWN_EXCEPTION, request, ex);
+        return new ResponseEntity<>(apiError, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

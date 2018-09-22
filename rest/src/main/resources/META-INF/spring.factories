@@ -1,4 +1,5 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   com.bosch.inst.base.rest.ControllerAdviser,\
-  com.bosch.inst.base.rest.ExceptionController,\
-  com.bosch.inst.base.rest.ServletContainerCustomizer
+  com.bosch.inst.base.rest.DefaultControllerAdviser,\
+  com.bosch.inst.base.rest.entity.ApiError,\
+  com.bosch.inst.base.rest.entity.ApiValidationError

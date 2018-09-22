@@ -1,6 +1,5 @@
 package com.bosch.inst.base.rest;
 
-import com.bosch.inst.base.rest.entity.ErrorMsg;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.hateoas.VndErrors;
 import org.springframework.http.HttpStatus;
