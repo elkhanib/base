@@ -56,7 +56,7 @@ public class AuthenticationProviderService implements AuthenticationProvider {
 
     @Override
     public boolean supports(Class<?> aClass) {
-        return true;
+        return supportedAuth.contains(aClass);
     }
 
     private Authentication authenticateUsernamePassword(UsernamePasswordAuthenticationToken auth) {

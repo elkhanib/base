@@ -1,6 +1,5 @@
 package com.bosch.inst.base.rest.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.springframework.http.HttpStatus;
 
@@ -9,9 +8,9 @@ import java.time.LocalDateTime;
 
 @Data
 public class ApiError {
-    private Integer code;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
+    //    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
     private LocalDateTime timestamp;
+    private Integer status;
     private String error;
     private String message;
     private String path;
@@ -22,7 +21,7 @@ public class ApiError {
 
     public ApiError(HttpStatus status, HttpServletRequest request, Throwable ex) {
         this();
-        this.code = status.value();
+        this.status = status.value();
         this.error = status.getReasonPhrase();
         this.message = ex.toString();
         this.path = request.getRequestURI();
@@ -31,7 +30,7 @@ public class ApiError {
 
     public ApiError(ApiErrorDef def, HttpServletRequest request, Throwable ex) {
         this();
-        this.code = def.getValue();
+        this.status = def.getValue();
         this.error = def.getReasonPhrase();
         this.message = ex.toString();
         this.path = request.getRequestURI();
