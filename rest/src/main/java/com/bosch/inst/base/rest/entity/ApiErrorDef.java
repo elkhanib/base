@@ -14,6 +14,7 @@ public enum ApiErrorDef {
     ILLEGAL_STATE_EXCEPTION(10004, "Illegal State"),
     DATA_INTEGRITY_VIOLATION_EXCEPTION(10005, "Data Integrity Violation"),
     UNKNOWN_REQUEST_PARAMETER_EXCEPTION(10006, "Unknown Request Parameter"),
+    CLIENT_ABORT_EXCEPTION(10007, "Client Abort"),
     ;
 
     private final int value;

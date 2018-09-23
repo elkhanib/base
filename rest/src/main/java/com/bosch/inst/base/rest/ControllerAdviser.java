@@ -3,6 +3,7 @@ package com.bosch.inst.base.rest;
 import com.bosch.inst.base.rest.entity.ApiError;
 import com.bosch.inst.base.rest.entity.ApiErrorDef;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.catalina.connector.ClientAbortException;
 import org.springframework.core.annotation.Order;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -86,4 +87,15 @@ public class ControllerAdviser extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(apiError, HttpStatus.CONFLICT);
 //        return new ResponseEntity<Object>(String.valueOf(ApiErrorDef.DATA_INTEGRITY_VIOLATION_EXCEPTION.getValue()), ex.getMessage());
     }
+
+    @ResponseBody
+    @ExceptionHandler(ClientAbortException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    ResponseEntity<Object> clientAbortException(HttpServletRequest request, Exception ex) {
+        log.warn(ex.getLocalizedMessage());
+
+        ApiError apiError = new ApiError(ApiErrorDef.CLIENT_ABORT_EXCEPTION, request, ex);
+        return new ResponseEntity<>(apiError, HttpStatus.BAD_REQUEST);
+    }
+
 }
