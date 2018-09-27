@@ -5,7 +5,7 @@ import com.bosch.inst.base.security.auth.AuthenticationProviderService;
 import com.bosch.inst.base.security.filter.BasicAuthenticationProcessingFilter;
 import com.bosch.inst.base.security.filter.CookieAuthenticationProcessingFilter;
 import com.bosch.inst.base.security.filter.TokenAuthenticationProcessingFilter;
-import com.bosch.inst.base.security.service.IUserProviderService;
+import com.bosch.inst.base.security.service.ISecurityProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -22,10 +22,10 @@ public abstract class AbstractWebSecurityConfigurerAdapter extends WebSecurityCo
     private AuthenticationProviderService authenticationProviderService;
 
     @Autowired
-    private IUserProviderService userProviderService;
+    private ISecurityProvider securityProvider;
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    protected void configure(AuthenticationManagerBuilder auth) {
 //        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 //        auth.userDetailsService(userProviderService).passwordEncoder(encoder);
         auth.authenticationProvider(authenticationProviderService);

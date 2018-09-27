@@ -1,6 +1,6 @@
 package com.bosch.inst.base.security.auth;
 
-import com.bosch.inst.base.security.service.IUserProviderService;
+import com.bosch.inst.base.security.service.ISecurityProvider;
 import io.jsonwebtoken.Jwts;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +31,7 @@ public class AuthenticationProviderService implements AuthenticationProvider {
     private String defaultRolePrefix = "ROLE_";
 
     @Autowired
-    private IUserProviderService userProviderService;
+    private ISecurityProvider userProviderService;
 
     @Autowired
     private JwtProperties jwtProperties;

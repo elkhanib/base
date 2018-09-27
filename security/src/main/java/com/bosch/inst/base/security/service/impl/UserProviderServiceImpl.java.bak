@@ -1,6 +1,6 @@
 package com.bosch.inst.base.security.service.impl;
 
-import com.bosch.inst.base.security.service.IUserProviderService;
+import com.bosch.inst.base.security.service.ISecurityProvider;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.GrantedAuthority;
