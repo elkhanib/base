@@ -14,6 +14,7 @@ import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.NoSuchElementException;
 import java.util.Set;
 
 /**
@@ -85,8 +86,11 @@ public class AuthenticationProviderService implements AuthenticationProvider {
     private Authentication authenticateWithPermissions(String username, String password) {
         try { // authenticate the username and password.
             return getAuthentication(username, password);
-        } catch (Exception e) {
+        } catch (BadCredentialsException e) {
             log.warn("User {} found but password does not match!", username);
+            throw new BadCredentialsException(CREDENTIALS_ERROR, e);
+        } catch (NoSuchElementException e) {
+            log.warn("User {} can not be found!", username);
             throw new BadCredentialsException(CREDENTIALS_ERROR, e);
         }
     }
