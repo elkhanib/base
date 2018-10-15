@@ -12,13 +12,13 @@ import org.springframework.web.util.UriComponentsBuilder;
 @Import(HateoasAwareSpringDataWebConfiguration.class)
 public class SortConfiguration {
 
-    private class PlcsSortHandlerMethodArgumentResolver extends HateoasSortHandlerMethodArgumentResolver {
+    private class QuerySortHandlerMethodArgumentResolver extends HateoasSortHandlerMethodArgumentResolver {
 
         @Override
         public void enhance(UriComponentsBuilder builder, MethodParameter parameter, Object value) {
             Object sort = value;
-            if (value instanceof PlcsSort) {
-                sort = ((PlcsSort) value).getOriginalSort();
+            if (value instanceof QuerySort) {
+                sort = ((QuerySort) value).getOriginalSort();
             }
             super.enhance(builder, parameter, sort);
         }
@@ -26,7 +26,7 @@ public class SortConfiguration {
 
     @Bean
     public HateoasSortHandlerMethodArgumentResolver sortResolver() {
-        return new PlcsSortHandlerMethodArgumentResolver();
+        return new QuerySortHandlerMethodArgumentResolver();
     }
 
 }

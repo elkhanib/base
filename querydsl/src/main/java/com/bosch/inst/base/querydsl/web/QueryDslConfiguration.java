@@ -12,7 +12,7 @@ import java.util.List;
 
 @Configuration
 @Import(QuerydslWebConfiguration.class)
-public class QueryDslPLCSConfiguration implements WebMvcConfigurer, ApplicationContextAware {
+public class QueryDslConfiguration implements WebMvcConfigurer, ApplicationContextAware {
     private ApplicationContext context;
 
     @Override

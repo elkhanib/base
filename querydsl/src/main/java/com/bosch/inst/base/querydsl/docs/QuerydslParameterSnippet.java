@@ -1,6 +1,6 @@
 package com.bosch.inst.base.querydsl.docs;
 
-import com.bosch.inst.base.querydsl.web.QueryDslPLCSConfiguration;
+import com.bosch.inst.base.querydsl.web.QueryDslConfiguration;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mysema.commons.lang.Assert;
@@ -86,7 +86,7 @@ public final class QuerydslParameterSnippet extends TemplatedSnippet {
 
         if (documentedFilters.isEmpty()) {
             throw new InvalidParameterException(String.format("The %s got no filters to document. Did you add %s to your TestConfiguration?",
-                    QuerydslParameterSnippet.class.getSimpleName(), QueryDslPLCSConfiguration.class
+                    QuerydslParameterSnippet.class.getSimpleName(), QueryDslConfiguration.class
             ));
         }
 

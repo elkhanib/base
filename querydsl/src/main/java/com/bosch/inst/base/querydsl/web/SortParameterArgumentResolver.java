@@ -48,7 +48,7 @@ public class SortParameterArgumentResolver extends HateoasPageableHandlerMethodA
                             return queryDsl.processSort(order.getProperty(), direction);
                         }).collect(Collectors.toList());
 
-        QSort sort = new PlcsSort(pageable.getSort(), orderSpecifiers.toArray(new OrderSpecifier[orderSpecifiers.size()]));
+        QSort sort = new QuerySort(pageable.getSort(), orderSpecifiers.toArray(new OrderSpecifier[orderSpecifiers.size()]));
         return new QPageRequest(pageable.getPageNumber(), pageable.getPageSize(), sort);
     }
 }

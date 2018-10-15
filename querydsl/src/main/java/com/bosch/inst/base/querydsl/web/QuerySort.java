@@ -6,11 +6,11 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.querydsl.QSort;
 
 @EqualsAndHashCode(callSuper = true)
-public class PlcsSort extends QSort {
+public class QuerySort extends QSort {
 
     private final Sort originalSort;
 
-    public PlcsSort(Sort originalSort, OrderSpecifier<?>... orderSpecifiers) {
+    public QuerySort(Sort originalSort, OrderSpecifier<?>... orderSpecifiers) {
         super(orderSpecifiers);
         this.originalSort = originalSort;
     }
