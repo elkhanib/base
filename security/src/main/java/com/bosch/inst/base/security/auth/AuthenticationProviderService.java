@@ -96,8 +96,13 @@ public class AuthenticationProviderService implements AuthenticationProvider {
     }
 
     private UsernamePasswordAuthenticationToken getAuthentication(String username, String password) {
-        UserDetails userDetails = userProviderService.authenticate(username, password);
-        return new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
+
+        if (!userProviderService.validate(username, password)) {
+            throw new BadCredentialsException(CREDENTIALS_ERROR);
+        } else {
+            UserDetails userDetails = userProviderService.loadUserByUsername(username);
+            return new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
+        }
     }
 
     private UsernamePasswordAuthenticationToken getAuthentication(String token) {
