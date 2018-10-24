@@ -79,6 +79,7 @@ public class DslDocumentation {
         public static final String INTEGER = "integer";
         public static final String LONG = "long";
         public static final String FLOAT = "float";
+        public static final String DOUBLE = "double";
         public static final String TIMESTAMP = "timestamp";
         public static final String ENUM = "enum";
     }
