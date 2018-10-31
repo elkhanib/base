@@ -8,6 +8,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -79,5 +80,6 @@ public class JwtLoginFilter extends UsernamePasswordAuthenticationFilter {
         c.setMaxAge(authProperties.getCookie().getMaxAge());
         //存储
         res.addCookie(c);
+        res.setStatus(HttpStatus.NO_CONTENT.value());
     }
 }
