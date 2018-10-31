@@ -42,7 +42,7 @@ public class WebSecurityConfigurationAdapter extends AbstractWebSecurityConfigur
 
         http.logout()
                 .deleteCookies(authProperties.getCookie().getName())
-                .logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler(HttpStatus.OK));
+                .logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler(HttpStatus.NO_CONTENT));
 
         // Return the 'WWW-Authenticate: Basic' header in case of missing credentials
         http.httpBasic();

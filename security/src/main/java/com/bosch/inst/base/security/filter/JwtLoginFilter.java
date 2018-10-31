@@ -78,6 +78,7 @@ public class JwtLoginFilter extends UsernamePasswordAuthenticationFilter {
         Cookie c = new Cookie(authProperties.getCookie().getName(), token);
         //设置过期时间
         c.setMaxAge(authProperties.getCookie().getMaxAge());
+        c.setPath("/");
         //存储
         res.addCookie(c);
         res.setStatus(HttpStatus.NO_CONTENT.value());
