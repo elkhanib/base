@@ -15,6 +15,7 @@ public enum ApiErrorDef {
     DATA_INTEGRITY_VIOLATION_EXCEPTION(10005, "Data Integrity Violation"),
     UNKNOWN_REQUEST_PARAMETER_EXCEPTION(10006, "Unknown Request Parameter"),
     CLIENT_ABORT_EXCEPTION(10007, "Client Abort"),
+    BAD_CREDENTIALS_EXCEPTION(10008, "Bad Credentials"),
     ;
 
     private final int value;

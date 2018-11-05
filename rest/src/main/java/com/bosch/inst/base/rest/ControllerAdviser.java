@@ -8,6 +8,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -32,9 +33,18 @@ public class ControllerAdviser extends ResponseEntityExceptionHandler {
     ResponseEntity<Object> noSuchElementExceptionHandler(HttpServletRequest request, NoSuchElementException ex) throws IOException {
         log.warn(ApiErrorDef.NO_SUCH_ELEMENT_EXCEPTION.getReasonPhrase(), ex.getLocalizedMessage());
 
-
         ApiError apiError = new ApiError(ApiErrorDef.NO_SUCH_ELEMENT_EXCEPTION, request, ex);
         return new ResponseEntity<>(apiError, HttpStatus.NOT_FOUND);
+    }
+
+    @ResponseBody
+    @ExceptionHandler(BadCredentialsException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    ResponseEntity<Object> badCredentialsExceptionHandler(HttpServletRequest request, BadCredentialsException ex) throws IOException {
+        log.warn(ApiErrorDef.BAD_CREDENTIALS_EXCEPTION.getReasonPhrase(), ex.getLocalizedMessage());
+
+        ApiError apiError = new ApiError(ApiErrorDef.BAD_CREDENTIALS_EXCEPTION, request, ex);
+        return new ResponseEntity<>(apiError, HttpStatus.UNAUTHORIZED);
     }
 
     @ResponseBody
