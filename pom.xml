@@ -16,6 +16,7 @@
         <module>rest</module>
         <module>security</module>
         <module>querydsl</module>
+        <module>domain</module>
     </modules>
 
     <parent>
