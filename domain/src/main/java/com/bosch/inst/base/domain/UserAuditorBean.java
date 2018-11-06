@@ -28,6 +28,8 @@ public class UserAuditorBean implements AuditorAware<String> {
         Object principal = ctx.getAuthentication().getPrincipal();
         if (principal.getClass().isAssignableFrom(User.class)) {
             return Optional.ofNullable(((User) principal).getUsername());
+        } else if (principal.getClass().isAssignableFrom(String.class)) {
+            return Optional.ofNullable((String) principal);
         } else {
             return null;
         }
