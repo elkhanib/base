@@ -12,7 +12,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.NoSuchElementException;
 import java.util.Set;
@@ -23,6 +22,8 @@ import java.util.Set;
 @Service
 @Slf4j
 public class AuthenticationProviderService implements AuthenticationProvider {
+    @Autowired
+    private ISecurityProvider securityProvider;
 
     private static final String CREDENTIALS_ERROR = "Invalid credentials";
 
@@ -112,6 +113,7 @@ public class AuthenticationProviderService implements AuthenticationProvider {
                 .parseClaimsJws(token)
                 .getBody()
                 .getSubject();
-        return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
+        return new UsernamePasswordAuthenticationToken(user, null, securityProvider.loadUserByUsername(user).getAuthorities());
     }
+
 }
