@@ -8,6 +8,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
 import java.util.ConcurrentModificationException;
 import java.util.NoSuchElementException;
 
@@ -30,7 +30,7 @@ public class ControllerAdviser extends ResponseEntityExceptionHandler {
     @ResponseBody
     @ExceptionHandler(NoSuchElementException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    ResponseEntity<Object> noSuchElementExceptionHandler(HttpServletRequest request, NoSuchElementException ex) throws IOException {
+    ResponseEntity<Object> noSuchElementExceptionHandler(HttpServletRequest request, NoSuchElementException ex) {
         log.warn(ApiErrorDef.NO_SUCH_ELEMENT_EXCEPTION.getReasonPhrase(), ex.getLocalizedMessage());
 
         ApiError apiError = new ApiError(ApiErrorDef.NO_SUCH_ELEMENT_EXCEPTION, request, ex);
@@ -38,9 +38,19 @@ public class ControllerAdviser extends ResponseEntityExceptionHandler {
     }
 
     @ResponseBody
+    @ExceptionHandler(AccessDeniedException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    ResponseEntity<Object> accessDeniedExceptionHandler(HttpServletRequest request, AccessDeniedException ex) {
+        log.warn(ApiErrorDef.ACCESS_DENIED_EXCEPTION.getReasonPhrase(), ex.getLocalizedMessage());
+
+        ApiError apiError = new ApiError(ApiErrorDef.ACCESS_DENIED_EXCEPTION, request, ex);
+        return new ResponseEntity<>(apiError, HttpStatus.UNAUTHORIZED);
+    }
+
+    @ResponseBody
     @ExceptionHandler(BadCredentialsException.class)
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
-    ResponseEntity<Object> badCredentialsExceptionHandler(HttpServletRequest request, BadCredentialsException ex) throws IOException {
+    ResponseEntity<Object> badCredentialsExceptionHandler(HttpServletRequest request, BadCredentialsException ex) {
         log.warn(ApiErrorDef.BAD_CREDENTIALS_EXCEPTION.getReasonPhrase(), ex.getLocalizedMessage());
 
         ApiError apiError = new ApiError(ApiErrorDef.BAD_CREDENTIALS_EXCEPTION, request, ex);

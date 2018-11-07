@@ -16,6 +16,7 @@ public enum ApiErrorDef {
     UNKNOWN_REQUEST_PARAMETER_EXCEPTION(10006, "Unknown Request Parameter"),
     CLIENT_ABORT_EXCEPTION(10007, "Client Abort"),
     BAD_CREDENTIALS_EXCEPTION(10008, "Bad Credentials"),
+    ACCESS_DENIED_EXCEPTION(10009, "Access Denied"),
     ;
 
     private final int value;
