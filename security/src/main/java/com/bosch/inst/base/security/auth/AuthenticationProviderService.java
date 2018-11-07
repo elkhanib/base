@@ -87,7 +87,7 @@ public class AuthenticationProviderService implements AuthenticationProvider {
         try { // authenticate the username and password.
             return getAuthentication(username, password);
         } catch (BadCredentialsException e) {
-            log.warn("User {} found but password does not match!", username);
+            log.warn(e.getLocalizedMessage(), username);
             throw new BadCredentialsException(CREDENTIALS_ERROR, e);
         } catch (NoSuchElementException e) {
             log.warn("User {} can not be found!", username);
