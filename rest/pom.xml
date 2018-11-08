@@ -36,5 +36,10 @@
             <artifactId>springfox-swagger-ui</artifactId>
             <version>${springfox-swagger.version}</version>
         </dependency>
+        <!--<dependency>-->
+        <!--<groupId>com.github.xiaoymin</groupId>-->
+        <!--<artifactId>swagger-bootstrap-ui</artifactId>-->
+        <!--<version>1.8.6</version>-->
+        <!--</dependency>-->
     </dependencies>
 </project>
