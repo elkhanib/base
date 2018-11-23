@@ -133,7 +133,7 @@ public final class QueryDsl implements Filtering, Sorting {
                 Collection<String> values = customValues == null ? getPossibleEnumValues() : customValues;
                 documentation.documentFilter(pathbinder.getSelector(), pathbinder.getOperator().toString(), documentationType, values);
 
-                return createFilter(pathbinder.getPath());
+                return createFilter(pathbinder.getPath(), pathbinder.getSelector());
             }
         }
 
@@ -157,7 +157,6 @@ public final class QueryDsl implements Filtering, Sorting {
 
     /**
      * parses the query and converts it into a {@link Predicate}
-     *
      * @param query query to be converted
      * @return converted {@link Predicate} or null if no query is specified
      */
