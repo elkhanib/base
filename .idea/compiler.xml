@@ -16,4 +16,14 @@
       </profile>
     </annotationProcessing>
   </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="base-domain" options="-parameters" />
+      <module name="base-logging" options="-parameters" />
+      <module name="base-querydsl" options="-parameters" />
+      <module name="base-rest" options="-parameters" />
+      <module name="base-security" options="-parameters" />
+      <module name="base-starter" options="-parameters" />
+    </option>
+  </component>
 </project>
