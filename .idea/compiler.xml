@@ -15,11 +15,15 @@
         <module name="base-starter" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="base-prometheus" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="base-domain" options="-parameters" />
       <module name="base-logging" options="-parameters" />
+      <module name="base-prometheus" options="-parameters" />
       <module name="base-querydsl" options="-parameters" />
       <module name="base-rest" options="-parameters" />
       <module name="base-security" options="-parameters" />
