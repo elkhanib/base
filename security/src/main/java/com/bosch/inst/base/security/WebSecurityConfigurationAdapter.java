@@ -30,7 +30,7 @@ public class WebSecurityConfigurationAdapter extends AbstractWebSecurityConfigur
 
         http.authorizeRequests()
                 .antMatchers("/", "/csrf", "/error", "/api/users/signup", "/swagger-ui.html", "/doc.html", "/webjars/springfox-swagger-ui/**", "/webjars/bycdao-ui/**", "/swagger-resources/**", "/v2/api-docs").permitAll()
-                .antMatchers("/prometheus").hasAnyAuthority("ACTUATOR")
+                .antMatchers("/actuator/**").hasAnyAuthority("ACTUATOR")
                 .anyRequest().authenticated();
 
         http.addFilter(new JwtLoginFilter(jwtProperties, authProperties, authenticationManager()));
