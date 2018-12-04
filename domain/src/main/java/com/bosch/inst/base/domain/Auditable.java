@@ -1,6 +1,7 @@
 package com.bosch.inst.base.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -19,6 +20,10 @@ import static javax.persistence.TemporalType.TIMESTAMP;
 @MappedSuperclass
 @Data
 @EntityListeners(AuditingEntityListener.class)
+/**
+ * prevent No serializer found for class error
+ */
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler", "fieldHandler"})
 public abstract class Auditable<U> {
 
     @CreatedBy
