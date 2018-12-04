@@ -28,7 +28,7 @@ public class ApiError {
     }
 
 
-    public ApiError(ApiErrorDef def, HttpServletRequest request, Throwable ex) {
+    public ApiError(BaseErrorDef def, HttpServletRequest request, Throwable ex) {
         this();
         this.status = def.getValue();
         this.error = def.getReasonPhrase();
