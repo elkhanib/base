@@ -31,7 +31,8 @@ public class ControllerAdviser extends ResponseEntityExceptionHandler {
     @ExceptionHandler(NoSuchElementException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     ResponseEntity<Object> noSuchElementExceptionHandler(HttpServletRequest request, NoSuchElementException ex) {
-        log.warn(ApiErrorDef.NO_SUCH_ELEMENT_EXCEPTION.getReasonPhrase(), ex.getLocalizedMessage());
+        log.warn(ApiErrorDef.NO_SUCH_ELEMENT_EXCEPTION.getReasonPhrase());
+        log.warn(ex.getLocalizedMessage());
 
         ApiError apiError = new ApiError(ApiErrorDef.NO_SUCH_ELEMENT_EXCEPTION, request, ex);
         return new ResponseEntity<>(apiError, HttpStatus.NOT_FOUND);
@@ -41,7 +42,8 @@ public class ControllerAdviser extends ResponseEntityExceptionHandler {
     @ExceptionHandler(AccessDeniedException.class)
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     ResponseEntity<Object> accessDeniedExceptionHandler(HttpServletRequest request, AccessDeniedException ex) {
-        log.warn(ApiErrorDef.ACCESS_DENIED_EXCEPTION.getReasonPhrase(), ex.getLocalizedMessage());
+        log.warn(ApiErrorDef.ACCESS_DENIED_EXCEPTION.getReasonPhrase());
+        log.warn(ex.getLocalizedMessage());
 
         ApiError apiError = new ApiError(ApiErrorDef.ACCESS_DENIED_EXCEPTION, request, ex);
         return new ResponseEntity<>(apiError, HttpStatus.UNAUTHORIZED);
@@ -51,7 +53,8 @@ public class ControllerAdviser extends ResponseEntityExceptionHandler {
     @ExceptionHandler(BadCredentialsException.class)
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     ResponseEntity<Object> badCredentialsExceptionHandler(HttpServletRequest request, BadCredentialsException ex) {
-        log.warn(ApiErrorDef.BAD_CREDENTIALS_EXCEPTION.getReasonPhrase(), ex.getLocalizedMessage());
+        log.warn(ApiErrorDef.BAD_CREDENTIALS_EXCEPTION.getReasonPhrase());
+        log.warn(ex.getLocalizedMessage());
 
         ApiError apiError = new ApiError(ApiErrorDef.BAD_CREDENTIALS_EXCEPTION, request, ex);
         return new ResponseEntity<>(apiError, HttpStatus.UNAUTHORIZED);
@@ -61,7 +64,8 @@ public class ControllerAdviser extends ResponseEntityExceptionHandler {
     @ExceptionHandler(IllegalArgumentException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     ResponseEntity<Object> illegalArgumentExceptionHandler(HttpServletRequest request, IllegalArgumentException ex) {
-        log.warn(ApiErrorDef.ILLEGAL_ARGUMENT_EXCEPTION.getReasonPhrase(), ex.getLocalizedMessage());
+        log.warn(ApiErrorDef.ILLEGAL_ARGUMENT_EXCEPTION.getReasonPhrase());
+        log.warn(ex.getLocalizedMessage());
 
         ApiError apiError = new ApiError(ApiErrorDef.ILLEGAL_ARGUMENT_EXCEPTION, request, ex);
         return new ResponseEntity<>(apiError, HttpStatus.BAD_REQUEST);
