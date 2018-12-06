@@ -3,7 +3,7 @@ package com.bosch.inst.base.security.filter;
 import com.bosch.inst.base.security.auth.AuthenticationProperties;
 import com.bosch.inst.base.security.auth.JwtProperties;
 import com.bosch.inst.base.security.auth.JwtUser;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.slf4j.Logger;
@@ -21,6 +21,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -43,8 +44,13 @@ public class JwtLoginFilter extends UsernamePasswordAuthenticationFilter {
     public Authentication attemptAuthentication(HttpServletRequest req,
                                                 HttpServletResponse res) throws AuthenticationException {
         try {
-            JwtUser user = new ObjectMapper()
-                    .readValue(req.getInputStream(), JwtUser.class);
+            InputStream inputStream = req.getInputStream();
+            StringBuffer out = new StringBuffer();
+            byte[] b = new byte[4096];
+            for (int n; (n = inputStream.read(b)) != -1; ) {
+                out.append(new String(b, 0, n));
+            }
+            JwtUser user = new Gson().fromJson(out.toString(), JwtUser.class);
 
             return authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
