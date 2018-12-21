@@ -6,8 +6,8 @@ import com.bosch.inst.base.security.local.filter.CorsFilter;
 import com.bosch.inst.base.security.local.filter.JwtLoginFilter;
 import com.bosch.inst.base.security.local.filter.XRequestedHeaderFilter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,7 +16,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
 
-@Profile("security-local")
+@ConditionalOnProperty(name = "im.enabled", havingValue = "false")
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -63,6 +63,4 @@ public class SecurityConfiguration extends AbstractWebSecurityConfigurerAdapter 
         // Section 'Protecting REST Services: Use of Custom Request Headers'
         http.csrf().disable();
     }
-
-
 }

@@ -1,5 +1,6 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   com.bosch.inst.base.security.im.servlet.NonCloudIClientConfiguration,\
   com.bosch.inst.base.security.im.servlet.SecurityConfiguration,\
+  com.bosch.inst.base.security.im.auth.CredentialsProperties,\
   com.bosch.inst.base.security.im.login.LoginController,\
   com.bosch.inst.base.security.im.cookie.AuthorizationCookieHandler

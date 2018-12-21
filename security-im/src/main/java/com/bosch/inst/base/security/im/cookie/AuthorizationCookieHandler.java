@@ -4,7 +4,7 @@ import com.bosch.im.api2.jwt.IJsonWebToken;
 import com.bosch.im.spring.config.AuthProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Profile;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
@@ -30,7 +30,7 @@ import static org.joda.time.Minutes.minutes;
  * @see RefreshLoginCookieFilter
  * @see SecurityConfiguration
  */
-@Profile("security-im")
+@ConditionalOnProperty(name = "im.enabled", havingValue = "true")
 @Slf4j
 @Service
 public class AuthorizationCookieHandler {
