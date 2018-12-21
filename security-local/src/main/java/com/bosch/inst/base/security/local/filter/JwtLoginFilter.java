@@ -1,8 +1,8 @@
 package com.bosch.inst.base.security.local.filter;
 
 import com.bosch.inst.base.security.local.auth.AuthenticationProperties;
-import com.bosch.inst.base.security.local.auth.JwtProperties;
-import com.bosch.inst.base.security.local.auth.JwtUser;
+import com.bosch.inst.base.security.local.auth.Credentials;
+import com.bosch.inst.base.security.local.auth.CredentialsProperties;
 import com.google.gson.Gson;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -28,13 +28,13 @@ import java.util.Date;
 public class JwtLoginFilter extends UsernamePasswordAuthenticationFilter {
     private static final Logger LOG = LoggerFactory.getLogger(JwtLoginFilter.class);
 
-    private JwtProperties jwtProperties;
+    private CredentialsProperties credentialsProperties;
     private AuthenticationProperties authProperties;
     private AuthenticationManager authenticationManager;
 
 
-    public JwtLoginFilter(JwtProperties jwtProperties, AuthenticationProperties authProperties, AuthenticationManager authenticationManager) {
-        this.jwtProperties = jwtProperties;
+    public JwtLoginFilter(CredentialsProperties credentialsProperties, AuthenticationProperties authProperties, AuthenticationManager authenticationManager) {
+        this.credentialsProperties = credentialsProperties;
         this.authProperties = authProperties;
         this.authenticationManager = authenticationManager;
     }
@@ -50,7 +50,7 @@ public class JwtLoginFilter extends UsernamePasswordAuthenticationFilter {
             for (int n; (n = inputStream.read(b)) != -1; ) {
                 out.append(new String(b, 0, n));
             }
-            JwtUser user = new Gson().fromJson(out.toString(), JwtUser.class);
+            Credentials user = new Gson().fromJson(out.toString(), Credentials.class);
 
             return authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
@@ -73,10 +73,10 @@ public class JwtLoginFilter extends UsernamePasswordAuthenticationFilter {
         String token = Jwts.builder()
                 .setSubject(((User) auth.getPrincipal()).getUsername())
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + jwtProperties.getExpire()))
-                .signWith(SignatureAlgorithm.HS512, jwtProperties.getSecret())
+                .setExpiration(new Date(System.currentTimeMillis() + credentialsProperties.getExpire()))
+                .signWith(SignatureAlgorithm.HS512, credentialsProperties.getSecret())
                 .compact();
-        res.addHeader(jwtProperties.getHeader(), token);
+        res.addHeader(credentialsProperties.getHeader(), token);
 
         //构造Cookie对象
         //添加到Cookie中

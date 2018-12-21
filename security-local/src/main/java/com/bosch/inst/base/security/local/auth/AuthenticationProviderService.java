@@ -38,7 +38,7 @@ public class AuthenticationProviderService implements AuthenticationProvider {
     private ISecurityProvider userProviderService;
 
     @Autowired
-    private JwtProperties jwtProperties;
+    private CredentialsProperties credentialsProperties;
 
     @Autowired
     public AuthenticationProviderService() {
@@ -111,7 +111,7 @@ public class AuthenticationProviderService implements AuthenticationProvider {
     private UsernamePasswordAuthenticationToken getAuthentication(String token) {
         // parse the token.
         String user = Jwts.parser()
-                .setSigningKey(jwtProperties.getSecret())
+                .setSigningKey(credentialsProperties.getSecret())
                 .parseClaimsJws(token)
                 .getBody()
                 .getSubject();

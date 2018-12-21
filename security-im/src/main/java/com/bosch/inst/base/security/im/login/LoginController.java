@@ -3,7 +3,6 @@ package com.bosch.inst.base.security.im.login;
 import com.bosch.im.spring.security.token.PermissionsAuthorizationToken;
 import com.bosch.im.spring.security.token.TenantUserPasswordToken;
 import com.bosch.im.spring.service.ImAuthenticationProviderService;
-import com.bosch.inst.base.security.im.EnableSecurityServlet;
 import com.bosch.inst.base.security.im.auth.Credentials;
 import com.bosch.inst.base.security.im.auth.CredentialsProperties;
 import com.bosch.inst.base.security.im.cookie.AuthorizationCookieHandler;
@@ -32,7 +31,6 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @Profile("security-im")
 @Slf4j
 @RestController
-@EnableSecurityServlet
 public class LoginController {
     @Autowired
     private CredentialsProperties credentialsProperties;

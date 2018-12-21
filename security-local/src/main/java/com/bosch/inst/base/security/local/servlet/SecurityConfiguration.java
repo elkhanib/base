@@ -1,7 +1,7 @@
-package com.bosch.inst.base.security.local;
+package com.bosch.inst.base.security.local.servlet;
 
 import com.bosch.inst.base.security.local.auth.AuthenticationProperties;
-import com.bosch.inst.base.security.local.auth.JwtProperties;
+import com.bosch.inst.base.security.local.auth.CredentialsProperties;
 import com.bosch.inst.base.security.local.filter.CorsFilter;
 import com.bosch.inst.base.security.local.filter.JwtLoginFilter;
 import com.bosch.inst.base.security.local.filter.XRequestedHeaderFilter;
@@ -20,12 +20,12 @@ import org.springframework.security.web.authentication.logout.HttpStatusReturnin
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class WebSecurityConfigurationAdapter extends AbstractWebSecurityConfigurerAdapter {
+public class SecurityConfiguration extends AbstractWebSecurityConfigurerAdapter {
     @Autowired
     private AuthenticationProperties authProperties;
 
     @Autowired
-    private JwtProperties jwtProperties;
+    private CredentialsProperties credentialsProperties;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -35,7 +35,7 @@ public class WebSecurityConfigurationAdapter extends AbstractWebSecurityConfigur
                 .antMatchers("/actuator/**").hasAnyAuthority("ACTUATOR")
                 .anyRequest().authenticated();
 
-        http.addFilter(new JwtLoginFilter(jwtProperties, authProperties, authenticationManager()));
+        http.addFilter(new JwtLoginFilter(credentialsProperties, authProperties, authenticationManager()));
 
         // Don't use sessions for stateless REST interfaces
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

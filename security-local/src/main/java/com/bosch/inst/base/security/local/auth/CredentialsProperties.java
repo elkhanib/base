@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Profile("security-local")
 @Component
 @Getter
-public class JwtProperties {
+public class CredentialsProperties {
     @Value("${jwt.header:X-Access-Token}")
     private String header;
 

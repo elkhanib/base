@@ -2,6 +2,8 @@ package com.bosch.inst.base.security.im.servlet;
 
 import com.bosch.im.spring.config.AuthProperties;
 import com.bosch.im.spring.security.ImWebSecurityConfigurerAdapter;
+import com.bosch.inst.base.security.im.filter.CorsFilter;
+import com.bosch.inst.base.security.im.filter.XRequestedHeaderFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -31,6 +33,8 @@ public class SecurityConfiguration extends ImWebSecurityConfigurerAdapter {
 
         // Don't use sessions for stateless REST interfaces
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+        http.addFilterBefore(new CorsFilter(), UsernamePasswordAuthenticationFilter.class);
 
 //        http.addFilterBefore(new EnforceSecureLoginFilter(), UsernamePasswordAuthenticationFilter.class);
         http.addFilterBefore(getTokenAuthFilter("/**"), UsernamePasswordAuthenticationFilter.class);

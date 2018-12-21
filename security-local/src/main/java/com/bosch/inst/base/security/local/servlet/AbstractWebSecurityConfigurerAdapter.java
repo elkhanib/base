@@ -1,4 +1,4 @@
-package com.bosch.inst.base.security.local;
+package com.bosch.inst.base.security.local.servlet;
 
 import com.bosch.inst.base.security.local.auth.AuthenticationProperties;
 import com.bosch.inst.base.security.local.auth.AuthenticationProviderService;

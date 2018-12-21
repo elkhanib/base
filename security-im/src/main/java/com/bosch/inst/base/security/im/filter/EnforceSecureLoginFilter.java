@@ -1,4 +1,4 @@
-package com.bosch.inst.base.security.im.servlet;
+package com.bosch.inst.base.security.im.filter;
 
 import org.springframework.web.filter.GenericFilterBean;
 
