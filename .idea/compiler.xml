@@ -11,6 +11,7 @@
         <module name="base-logging" />
         <module name="base-querydsl" />
         <module name="base-rest" />
+        <module name="base-security-im" />
         <module name="base-security-local" />
         <module name="base-starter" />
       </profile>
@@ -22,6 +23,7 @@
       <module name="base-logging" options="-parameters" />
       <module name="base-querydsl" options="-parameters" />
       <module name="base-rest" options="-parameters" />
+      <module name="base-security-im" options="-parameters" />
       <module name="base-security-local" options="-parameters" />
       <module name="base-starter" options="-parameters" />
     </option>

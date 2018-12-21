@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.bosch.inst.base.security.im.servlet.NonCloudIClientConfiguration,\
+  com.bosch.inst.base.security.im.servlet.SecurityConfiguration

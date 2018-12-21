@@ -29,17 +29,22 @@
         </dependency>
         <dependency>
             <groupId>com.bosch.inst</groupId>
-            <artifactId>base-security-local</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.bosch.inst</groupId>
             <artifactId>base-querydsl</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.bosch.inst</groupId>
             <artifactId>base-domain</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.bosch.inst</groupId>
+            <artifactId>base-security-local</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.bosch.inst</groupId>
+            <artifactId>base-security-im</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

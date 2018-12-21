@@ -14,9 +14,10 @@
         <module>starter</module>
         <module>logging</module>
         <module>rest</module>
-        <module>security-local</module>
         <module>querydsl</module>
         <module>domain</module>
+        <module>security-local</module>
+        <module>security-im</module>
     </modules>
 
     <parent>
@@ -34,6 +35,7 @@
         <springfox-swagger.version>2.8.0</springfox-swagger.version>
         <micrometer-registry-prometheus.version>1.1.0</micrometer-registry-prometheus.version>
         <gson.version>2.8.5</gson.version>
+        <im-spring-security.version>0.2.9</im-spring-security.version>
     </properties>
 
     <dependencies>
