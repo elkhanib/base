@@ -29,7 +29,7 @@
         </dependency>
         <dependency>
             <groupId>com.bosch.inst</groupId>
-            <artifactId>base-security</artifactId>
+            <artifactId>base-security-local</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

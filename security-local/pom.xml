@@ -6,8 +6,8 @@
 
     <packaging>jar</packaging>
     <groupId>com.bosch.inst</groupId>
-    <artifactId>base-security</artifactId>
-    <name>base :: security</name>
+    <artifactId>base-security-local</artifactId>
+    <name>base :: security local</name>
 
     <parent>
         <groupId>com.bosch.inst</groupId>

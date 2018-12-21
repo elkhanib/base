@@ -14,7 +14,7 @@
         <module>starter</module>
         <module>logging</module>
         <module>rest</module>
-        <module>security</module>
+        <module>security-local</module>
         <module>querydsl</module>
         <module>domain</module>
     </modules>
