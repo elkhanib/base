@@ -2,8 +2,10 @@ package com.bosch.inst.base.security.auth;
 
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
+@Profile("security-local")
 @Component
 @Getter
 public class JwtProperties {

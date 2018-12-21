@@ -4,6 +4,7 @@ import com.bosch.inst.base.security.service.ISecurityProvider;
 import io.jsonwebtoken.Jwts;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,6 +20,7 @@ import java.util.Set;
 /**
  * Authenticates a user against IoT Permissions and requests the proper auth.
  */
+@Profile("security-local")
 @Service
 @Slf4j
 public class AuthenticationProviderService implements AuthenticationProvider {

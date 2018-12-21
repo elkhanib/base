@@ -3,7 +3,9 @@ package com.bosch.inst.base.security.auth;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Profile;
 
+@Profile("security-local")
 @ConfigurationProperties("auth")
 @Getter
 public class AuthenticationProperties {
