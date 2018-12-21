@@ -1,15 +1,15 @@
 package com.bosch.inst.base.security.im.login;
 
+import com.bosch.im.spring.security.token.PermissionsAuthorizationToken;
 import com.bosch.im.spring.security.token.TenantUserPasswordToken;
 import com.bosch.im.spring.service.ImAuthenticationProviderService;
 import com.bosch.inst.base.security.im.EnableSecurityServlet;
+import com.bosch.inst.base.security.im.auth.Credentials;
+import com.bosch.inst.base.security.im.auth.CredentialsProperties;
 import com.bosch.inst.base.security.im.cookie.AuthorizationCookieHandler;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,10 +29,13 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
  * This controller adds the AuthorizationToken as Cookie for the client.<br>
  * There's no logout endpoint since this is provided and handled by Spring Security (see {@link com.bosch.ds.plcs.base.security.configuration.servlet.SecurityConfiguration.DefaultWebSecurityConfigurerAdapter}).
  */
+@Profile("security-im")
 @Slf4j
 @RestController
 @EnableSecurityServlet
 public class LoginController {
+    @Autowired
+    private CredentialsProperties credentialsProperties;
 
     private AuthorizationCookieHandler authorizationCookieHandler;
     private ImAuthenticationProviderService authenticationProviderService;
@@ -58,21 +61,7 @@ public class LoginController {
         TenantUserPasswordToken token = new TenantUserPasswordToken(credentials.getUsername(), credentials.getPassword(), credentials.getTenant());
         Authentication authentication = authenticationProviderService.authenticate(token);
         authorizationCookieHandler.setAuthenticationCookie(response, authentication);
-    }
 
-    /* ********************* Cookie handling ********************* */
-
-
-    @Data
-    @AllArgsConstructor
-    @NoArgsConstructor
-    static class Credentials {
-
-        private String tenant;
-        @NonNull
-        private String username;
-        @NonNull
-        private String password;
-
+        response.addHeader(credentialsProperties.getHeader(), ((PermissionsAuthorizationToken) authentication).getDetails().getJwt());
     }
 }
