@@ -10,16 +10,22 @@ import org.springframework.context.annotation.*;
 @Profile("!cloud")
 @Import(ImStarterConfiguration.class)
 public class NonCloudIClientConfiguration {
-    @Value("${jwt.header:X-Access-Token}")
-    private String header;
+    @Value("${im.clientId}")
+    private String clientId;
+
+    @Value("${im.clientSecret}")
+    private String clientSecret;
+
+    @Value("${im.url}")
+    private String serviceUrl;
 
     @Bean
     @Primary
     public IClient nonCloudClient() {
         return Permissions.createClientBuilder()
-                .clientId("e00402af-7658-4827-86dc-60d25b4f06be")
-                .clientSecret("HSDLSuN3jmOPWQ9viqI8Iq")
-                .serviceUrl("https://permissions-api.s-apps.de1.bosch-iot-cloud.com/")
+                .clientId(clientId)
+                .clientSecret(clientSecret)
+                .serviceUrl(serviceUrl)
                 .build();
     }
 }

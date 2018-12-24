@@ -2,10 +2,8 @@ package com.bosch.inst.base.security.local.auth;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@ConditionalOnProperty(name = "im.enabled", havingValue = "false")
 @ConfigurationProperties("auth")
 @Getter
 public class AuthenticationProperties {

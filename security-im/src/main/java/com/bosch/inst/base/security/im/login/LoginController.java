@@ -8,7 +8,7 @@ import com.bosch.inst.base.security.im.auth.CredentialsProperties;
 import com.bosch.inst.base.security.im.cookie.AuthorizationCookieHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Import;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,22 +28,18 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
  * This controller adds the AuthorizationToken as Cookie for the client.<br>
  * There's no logout endpoint since this is provided and handled by Spring Security (see {@link com.bosch.ds.plcs.base.security.configuration.servlet.SecurityConfiguration.DefaultWebSecurityConfigurerAdapter}).
  */
-@ConditionalOnProperty(name = "im.enabled", havingValue = "true")
+@Import({CredentialsProperties.class, AuthorizationCookieHandler.class})
 @Slf4j
 @RestController
 public class LoginController {
     @Autowired
     private CredentialsProperties credentialsProperties;
 
+    @Autowired
     private AuthorizationCookieHandler authorizationCookieHandler;
-    private ImAuthenticationProviderService authenticationProviderService;
-
 
     @Autowired
-    public LoginController(AuthorizationCookieHandler authorizationCookieHandler, ImAuthenticationProviderService authenticationProviderService) {
-        this.authorizationCookieHandler = authorizationCookieHandler;
-        this.authenticationProviderService = authenticationProviderService;
-    }
+    private ImAuthenticationProviderService authenticationProviderService;
 
     @RequestMapping(value = "login", method = GET)
     public void getLogin(HttpServletRequest request, HttpServletResponse response) {

@@ -1,5 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.bosch.inst.base.security.local.auth.AuthenticationProperties,\
-  com.bosch.inst.base.security.local.auth.CredentialsProperties,\
-  com.bosch.inst.base.security.local.auth.AuthenticationProviderService,\
-  com.bosch.inst.base.security.local.servlet.SecurityConfiguration
+  com.bosch.inst.base.security.local.SecureServletConfiguration

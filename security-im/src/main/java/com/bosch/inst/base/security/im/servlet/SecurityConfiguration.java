@@ -5,7 +5,6 @@ import com.bosch.im.spring.security.ImWebSecurityConfigurerAdapter;
 import com.bosch.inst.base.security.im.filter.CorsFilter;
 import com.bosch.inst.base.security.im.filter.XRequestedHeaderFilter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -15,7 +14,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
 
-@ConditionalOnProperty(name = "im.enabled", havingValue = "true")
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)

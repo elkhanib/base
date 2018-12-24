@@ -7,6 +7,7 @@ import com.bosch.inst.base.security.local.filter.CookieAuthenticationProcessingF
 import com.bosch.inst.base.security.local.filter.TokenAuthenticationProcessingFilter;
 import com.bosch.inst.base.security.local.service.ISecurityProvider;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Import;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
@@ -14,6 +15,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
  * Can be used to create an own WebSecurityConfigurerAdapter that is pre-configured
  * with the AuthenticationProviderService and provides some methods for easier filter config.
  */
+@Import({AuthenticationProperties.class, AuthenticationProviderService.class})
 public abstract class AbstractWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
     @Autowired
     private AuthenticationProperties properties;

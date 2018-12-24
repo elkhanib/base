@@ -2,10 +2,8 @@ package com.bosch.inst.base.security.im.auth;
 
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
-@ConditionalOnProperty(name = "im.enabled", havingValue = "true")
 @Component
 @Getter
 public class CredentialsProperties {

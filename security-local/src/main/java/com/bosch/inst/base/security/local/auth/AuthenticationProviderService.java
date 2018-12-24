@@ -4,7 +4,7 @@ import com.bosch.inst.base.security.local.service.ISecurityProvider;
 import io.jsonwebtoken.Jwts;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Import;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -20,13 +20,10 @@ import java.util.Set;
 /**
  * Authenticates a user against IoT Permissions and requests the proper auth.
  */
-@ConditionalOnProperty(name = "im.enabled", havingValue = "false")
+@Import({CredentialsProperties.class})
 @Service
 @Slf4j
 public class AuthenticationProviderService implements AuthenticationProvider {
-    @Autowired
-    private ISecurityProvider securityProvider;
-
     private static final String CREDENTIALS_ERROR = "Invalid credentials";
 
 
@@ -35,7 +32,7 @@ public class AuthenticationProviderService implements AuthenticationProvider {
     private String defaultRolePrefix = "ROLE_";
 
     @Autowired
-    private ISecurityProvider userProviderService;
+    private ISecurityProvider securityProvider;
 
     @Autowired
     private CredentialsProperties credentialsProperties;
@@ -100,10 +97,10 @@ public class AuthenticationProviderService implements AuthenticationProvider {
 
     private UsernamePasswordAuthenticationToken getAuthentication(String username, String password) {
 
-        if (!userProviderService.validate(username, password)) {
+        if (!securityProvider.validate(username, password)) {
             throw new BadCredentialsException(CREDENTIALS_ERROR);
         } else {
-            UserDetails userDetails = userProviderService.loadUserByUsername(username);
+            UserDetails userDetails = securityProvider.loadUserByUsername(username);
             return new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
         }
     }
