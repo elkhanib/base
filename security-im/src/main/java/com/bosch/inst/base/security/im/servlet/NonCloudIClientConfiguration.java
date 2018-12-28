@@ -10,13 +10,13 @@ import org.springframework.context.annotation.*;
 @Profile("!cloud")
 @Import(ImStarterConfiguration.class)
 public class NonCloudIClientConfiguration {
-    @Value("${im.clientId}")
+    @Value("${im.clientId:d0953a11-080e-4c24-a773-d449cb834a28}")
     private String clientId;
 
-    @Value("${im.clientSecret}")
+    @Value("${im.clientSecret:DcQ1BwkqN4ii5F4jwS37hy}")
     private String clientSecret;
 
-    @Value("${im.url}")
+    @Value("${im.url:https://permissions-api.apps.bosch-iot-cloud.com}")
     private String serviceUrl;
 
     @Bean
