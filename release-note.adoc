@@ -1,5 +1,8 @@
 = Release Notes
 
+== 1.002:
+* Change release note file name
+
 == 1.001:
 * Update Spring framework to 2.1.1
 
