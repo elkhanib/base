@@ -1,4 +1,7 @@
 = Release Notes
 
+== 1.001:
+* Update Spring framework to 2.1.1
+
 == 1.000:
 * First release
