@@ -19,13 +19,13 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="base-domain" options="-parameters" />
-      <module name="base-logging" options="-parameters" />
-      <module name="base-querydsl" options="-parameters" />
-      <module name="base-rest" options="-parameters" />
-      <module name="base-security-im" options="-parameters" />
-      <module name="base-security-local" options="-parameters" />
-      <module name="base-starter" options="-parameters" />
+      <module name="base-domain" options="" />
+      <module name="base-logging" options="" />
+      <module name="base-querydsl" options="" />
+      <module name="base-rest" options="" />
+      <module name="base-security-im" options="" />
+      <module name="base-security-local" options="" />
+      <module name="base-starter" options="" />
     </option>
   </component>
 </project>

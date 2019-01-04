@@ -14,6 +14,8 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
 
+import static org.springframework.http.HttpMethod.POST;
+
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -25,7 +27,8 @@ public class SecurityConfiguration extends ImWebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
-                .antMatchers("/", "/login", "/csrf", "/error", "/api/users/signup", "/swagger-ui.html", "/doc.html", "/webjars/springfox-swagger-ui/**", "/webjars/bycdao-ui/**", "/swagger-resources/**", "/v2/api-docs").permitAll()
+                .antMatchers(POST, "/login").permitAll()
+                .antMatchers("/", "/csrf", "/error", "/api/users/signup", "/swagger-ui.html", "/doc.html", "/webjars/springfox-swagger-ui/**", "/webjars/bycdao-ui/**", "/swagger-resources/**", "/v2/api-docs").permitAll()
                 .antMatchers("/actuator/**").hasAnyAuthority("ACTUATOR")
                 .anyRequest().authenticated();
 
