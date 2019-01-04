@@ -1,10 +1,13 @@
 = Release Notes
 
-== 1.002:
+== 0.3:
+* Change release versions
+
+== 0.2:
 * Change release note file name
 
-== 1.001:
+== 0.1:
 * Update Spring framework to 2.1.1
 
-== 1.000:
+== 0.0:
 * First release
