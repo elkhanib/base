@@ -13,39 +13,39 @@
     <parent>
         <groupId>com.bosch.inst</groupId>
         <artifactId>base</artifactId>
-        <version>0.3</version>
+        <version>0.4</version>
     </parent>
 
     <dependencies>
         <dependency>
             <groupId>com.bosch.inst</groupId>
             <artifactId>base-logging</artifactId>
-            <version>${project.version}</version>
+            <version>0.4</version>
         </dependency>
         <dependency>
             <groupId>com.bosch.inst</groupId>
             <artifactId>base-rest</artifactId>
-            <version>${project.version}</version>
+            <version>0.4</version>
         </dependency>
         <dependency>
             <groupId>com.bosch.inst</groupId>
             <artifactId>base-querydsl</artifactId>
-            <version>${project.version}</version>
+            <version>0.4</version>
         </dependency>
         <dependency>
             <groupId>com.bosch.inst</groupId>
             <artifactId>base-domain</artifactId>
-            <version>${project.version}</version>
+            <version>0.4</version>
         </dependency>
         <dependency>
             <groupId>com.bosch.inst</groupId>
             <artifactId>base-security-local</artifactId>
-            <version>${project.version}</version>
+            <version>0.4</version>
         </dependency>
         <dependency>
             <groupId>com.bosch.inst</groupId>
             <artifactId>base-security-im</artifactId>
-            <version>${project.version}</version>
+            <version>0.4</version>
         </dependency>
     </dependencies>
 

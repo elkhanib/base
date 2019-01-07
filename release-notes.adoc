@@ -1,5 +1,9 @@
 = Release Notes
 
+== 0.4:
+* Add base version property
+* Add versions-maven-plugin
+
 == 0.3:
 * Change release versions
 

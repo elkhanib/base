@@ -15,6 +15,7 @@
 **/*.iws
 **/*.iml
 **/*.ipr
+**/*.versionsBackup
 
 ### NetBeans ###
 **/nbproject/private/
