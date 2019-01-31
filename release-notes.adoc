@@ -1,5 +1,8 @@
 = Release Notes
 
+== 0.6:
+* Change MySQL driver to MariaDB
+
 == 0.5:
 * Update Spring framework to 2.1.2
 
