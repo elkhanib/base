@@ -1,5 +1,8 @@
 = Release Notes
 
+== 0.5:
+* Update Spring framework to 2.1.2
+
 == 0.4:
 * Add base version property
 * Add versions-maven-plugin
