@@ -28,7 +28,7 @@
     </parent>
 
     <properties>
-        <base.version>0.6</base.version>
+        <base.version>0.7</base.version>
         <source.version>1.8</source.version>
         <target.version>1.8</target.version>
         <querydsl.version>4.2.1</querydsl.version>
