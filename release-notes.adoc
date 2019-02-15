@@ -1,5 +1,8 @@
 = Release Notes
 
+== 0.7:
+* Update springfox-swagger-ui to 2.9.2
+
 == 0.6:
 * Change MySQL driver to MariaDB
 
