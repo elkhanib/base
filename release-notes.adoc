@@ -1,5 +1,8 @@
 = Release Notes
 
+== 0.8:
+* Update Spring framework to 2.1.3
+
 == 0.7:
 * Update springfox-swagger-ui to 2.9.2
 

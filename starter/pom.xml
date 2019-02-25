@@ -13,7 +13,7 @@
     <parent>
         <groupId>com.bosch.inst</groupId>
         <artifactId>base</artifactId>
-        <version>0.7</version>
+        <version>0.8</version>
     </parent>
 
     <dependencies>
