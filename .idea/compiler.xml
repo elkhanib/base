@@ -11,11 +11,13 @@
         <module name="base-logging" />
         <module name="base-querydsl" />
         <module name="base-rest" />
-        <module name="base-security-im" />
         <module name="base-security-local" />
         <module name="base-starter" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="base-security-im" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">

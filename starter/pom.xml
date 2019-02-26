@@ -13,7 +13,7 @@
     <parent>
         <groupId>com.bosch.inst</groupId>
         <artifactId>base</artifactId>
-        <version>0.8</version>
+        <version>0.9</version>
     </parent>
 
     <dependencies>
@@ -36,10 +36,6 @@
         <dependency>
             <groupId>com.bosch.inst</groupId>
             <artifactId>base-security-local</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.bosch.inst</groupId>
-            <artifactId>base-security-im</artifactId>
         </dependency>
     </dependencies>
 

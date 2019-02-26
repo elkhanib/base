@@ -7,7 +7,7 @@
     <groupId>com.bosch.inst</groupId>
     <artifactId>base</artifactId>
     <packaging>pom</packaging>
-    <version>0.8</version>
+    <version>0.9</version>
     <name>base :: parent</name>
 
     <modules>
@@ -17,7 +17,6 @@
         <module>querydsl</module>
         <module>domain</module>
         <module>security-local</module>
-        <module>security-im</module>
     </modules>
 
     <parent>
@@ -28,7 +27,7 @@
     </parent>
 
     <properties>
-        <base.version>0.8</base.version>
+        <base.version>0.9</base.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <source.version>1.8</source.version>
@@ -59,11 +58,6 @@
             <dependency>
                 <groupId>com.bosch.inst</groupId>
                 <artifactId>base-security-local</artifactId>
-                <version>${base.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.bosch.inst</groupId>
-                <artifactId>base-security-im</artifactId>
                 <version>${base.version}</version>
             </dependency>
             <dependency>
