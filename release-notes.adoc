@@ -1,5 +1,11 @@
 = Release Notes
 
+== 0.10:
+* Add operator ne
+
+== 0.9:
+* Update
+
 == 0.8:
 * Update Spring framework to 2.1.3
 

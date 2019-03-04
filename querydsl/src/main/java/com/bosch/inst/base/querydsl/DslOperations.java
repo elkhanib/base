@@ -28,6 +28,10 @@ public final class DslOperations {
         return path.eq(value);
     }
 
+    public static <T> Predicate ne(SimpleExpression<T> path, T value) {
+        return path.ne(value);
+    }
+
     public static Predicate eqIc(StringPath path, String value) {
         return path.equalsIgnoreCase(value);
     }
