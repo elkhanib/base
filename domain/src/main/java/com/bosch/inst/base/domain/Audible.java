@@ -28,7 +28,7 @@ public abstract class Audible<U> {
 
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(nullable = false, updatable = false, columnDefinition = "DATETIME(6)")
+    @Column(nullable = false, updatable = false, columnDefinition = "DATETIME(3)")
     @JsonIgnore
     protected Date createdDate;
 
@@ -38,7 +38,7 @@ public abstract class Audible<U> {
 
     @LastModifiedDate
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(columnDefinition = "DATETIME(6)")
+    @Column(columnDefinition = "DATETIME(3)")
     @JsonIgnore
     protected Date lastModifiedDate;
 
