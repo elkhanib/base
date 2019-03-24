@@ -4,6 +4,7 @@ import lombok.Value;
 import org.springframework.core.convert.support.DefaultConversionService;
 
 import java.time.Instant;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,6 +24,9 @@ class DslConverters {
         converters.put(Float.class, new NamedConverter<>(DslDocumentation.Types.FLOAT, source -> conversionService.convert(source, Float.class)));
         converters.put(Double.class, new NamedConverter<>(DslDocumentation.Types.DOUBLE, source -> conversionService.convert(source, Double.class)));
         converters.put(Instant.class, new NamedConverter<>(DslDocumentation.Types.TIMESTAMP, source -> conversionService.convert(source, Instant.class)));
+        converters.put(Date.class, new NamedConverter<>(DslDocumentation.Types.DATE, source -> conversionService.convert(source, Date.class)));
+
+
     }
 
     <T> void addConverter(final Class<? extends T> targetType, NamedConverter<T> converter) {

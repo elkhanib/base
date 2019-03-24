@@ -7,7 +7,7 @@
     <groupId>com.bosch.inst</groupId>
     <artifactId>base</artifactId>
     <packaging>pom</packaging>
-    <version>0.10</version>
+    <version>0.11</version>
     <name>base :: parent</name>
 
     <modules>
@@ -27,7 +27,7 @@
     </parent>
 
     <properties>
-        <base.version>0.10</base.version>
+        <base.version>0.11</base.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <source.version>1.8</source.version>

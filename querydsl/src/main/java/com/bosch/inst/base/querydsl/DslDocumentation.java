@@ -82,5 +82,6 @@ public class DslDocumentation {
         public static final String DOUBLE = "double";
         public static final String TIMESTAMP = "timestamp";
         public static final String ENUM = "enum";
+        public static final String DATE = "date";
     }
 }
