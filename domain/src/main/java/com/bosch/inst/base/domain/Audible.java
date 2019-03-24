@@ -9,13 +9,8 @@ import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.Column;
-import javax.persistence.EntityListeners;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.Temporal;
+import javax.persistence.*;
 import java.util.Date;
-
-import static javax.persistence.TemporalType.TIMESTAMP;
 
 @MappedSuperclass
 @Data
@@ -24,7 +19,7 @@ import static javax.persistence.TemporalType.TIMESTAMP;
  * prevent No serializer found for class error
  */
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler", "fieldHandler"})
-public abstract class Auditable<U> {
+public abstract class Audible<U> {
 
     @CreatedBy
     @Column(nullable = false, updatable = false)
@@ -32,7 +27,7 @@ public abstract class Auditable<U> {
     protected U createdBy;
 
     @CreatedDate
-    @Temporal(TIMESTAMP)
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false, updatable = false)
     @JsonIgnore
     protected Date createdDate;
@@ -42,7 +37,7 @@ public abstract class Auditable<U> {
     protected U lastModifiedBy;
 
     @LastModifiedDate
-    @Temporal(TIMESTAMP)
+    @Temporal(TemporalType.TIMESTAMP)
     @JsonIgnore
     protected Date lastModifiedDate;
 
