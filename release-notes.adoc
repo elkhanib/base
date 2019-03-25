@@ -1,7 +1,11 @@
 = Release Notes
 
+== 0.13:
+* Add Spring Cloud support
+* Change Audible Instant type to Date
+
 == 0.12:
-* Change Audible Date type to Instant
+* Change Audible  type to Instant
 
 == 0.11:
 * Add Date converter
