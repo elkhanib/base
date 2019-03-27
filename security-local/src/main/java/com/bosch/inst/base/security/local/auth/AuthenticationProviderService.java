@@ -1,6 +1,6 @@
 package com.bosch.inst.base.security.local.auth;
 
-import com.bosch.inst.base.security.local.service.ISecurityProvider;
+import com.bosch.inst.base.domain.ISecurityProvider;
 import io.jsonwebtoken.Jwts;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

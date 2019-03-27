@@ -1,11 +1,11 @@
 package com.bosch.inst.base.security.local.servlet;
 
+import com.bosch.inst.base.domain.ISecurityProvider;
 import com.bosch.inst.base.security.local.auth.AuthenticationProperties;
 import com.bosch.inst.base.security.local.auth.AuthenticationProviderService;
 import com.bosch.inst.base.security.local.filter.BasicAuthenticationProcessingFilter;
 import com.bosch.inst.base.security.local.filter.CookieAuthenticationProcessingFilter;
 import com.bosch.inst.base.security.local.filter.TokenAuthenticationProcessingFilter;
-import com.bosch.inst.base.security.local.service.ISecurityProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Import;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;

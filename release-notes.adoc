@@ -1,5 +1,8 @@
 = Release Notes
 
+== 0.14:
+* Add getLoginUser
+
 == 0.13:
 * Add Spring Cloud support
 * Change Audible Instant type to Date
