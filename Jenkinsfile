@@ -24,7 +24,6 @@ node {
             sh "mvn compile package -DskipTests"
         }
 
-
 //        stage('package & publish to nexus') {
 //            sh "mvn compile package -DskipTests"
 //            // FIXME: Temporarily disabled 'publish to nexus'
