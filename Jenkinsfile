@@ -2,7 +2,7 @@
 
 node {
 
-    withMaven(){  // use pipeline-maven-plugin to config the maven
+    withMaven() {  // use pipeline-maven-plugin to config the maven
 
         stage('checkout') {
             checkout scm
@@ -20,10 +20,14 @@ node {
             sh "mvn test"
         }
 
-        stage('package & publish to nexus') {
-            //sh "mvn package -Pwebpack,dev,development-phase -DskipTests"
-            // FIXME: Temporarily disabled 'publish to nexus'
-             sh "mvn deploy -Prelease-phase -DskipTests"
+        stage('Build and install to local maven repository ') {
+            sh "mvn compile package -DskipTests"
         }
+
+//        stage('package & publish to nexus') {
+//            sh "mvn compile package -DskipTests"
+//            // FIXME: Temporarily disabled 'publish to nexus'
+//            sh "mvn deploy -Prelease-phase -DskipTests"
+//        }
     }
 }
