@@ -228,4 +228,33 @@
             </plugins>
         </pluginManagement>
     </build>
+    <profiles>
+        <profile>
+            <id>instnj-developer</id>
+            <distributionManagement>
+                <snapshotRepository>
+                    <id>snapshots</id>
+                    <url>http://nj0vm002.apac.bosch.com:8089/repository/maven-snapshots/</url>
+                </snapshotRepository>
+            </distributionManagement>
+        </profile>
+        <profile>
+            <id>release-phase</id>
+            <distributionManagement>
+                <repository>
+                    <id>releases</id>
+                    <url>http://nj0vm002.apac.bosch.com:8089/repository/maven-releases/</url>
+                </repository>
+            </distributionManagement>
+        </profile>
+        <profile>
+            <id>stabilization-phase</id>
+            <distributionManagement>
+                <repository>
+                    <id>release-candidates</id>
+                    <url>http://nj0vm002.apac.bosch.com:8089/repository/maven-release-candidates/</url>
+                </repository>
+            </distributionManagement>
+        </profile>
+    </profiles>    
 </project>
