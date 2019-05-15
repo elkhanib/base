@@ -21,7 +21,7 @@ node {
         }
 
         stage('Build and install to local maven repository ') {
-            sh "mvn compile package -DskipTests"
+            sh "mvn compile install -DskipTests"
         }
 
 //        stage('package & publish to nexus') {
