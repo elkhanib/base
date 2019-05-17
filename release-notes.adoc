@@ -1,5 +1,8 @@
 = Release Notes
 
+== 0.15:
+* Update spring boot version to 2.1.5.RELEASE
+
 == 0.14:
 * Add getLoginUser
 
