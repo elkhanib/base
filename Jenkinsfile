@@ -45,6 +45,9 @@ pipeline {
         }
 
         stage('Install to local maven repository ') {
+            when {
+                branch 'master'
+            }
             steps {
                 withMaven() {
                     sh "mvn install -DskipTests"
