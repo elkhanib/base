@@ -1,5 +1,8 @@
 = Release Notes
 
+== 0.17:
+* update base.version
+
 == 0.16:
 * Change NoSuchElementException to HttpStatus.INTERNAL_SERVER_ERROR
 
