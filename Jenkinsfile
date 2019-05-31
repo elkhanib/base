@@ -1,27 +1,58 @@
 #!/usr/bin/env groovy
 
-node {
-
-    withMaven() {  // use pipeline-maven-plugin to config the maven
-
+// Declarative //
+pipeline {
+    agent any
+    stages {
         stage('checkout') {
-            checkout scm
+            steps {
+                withMaven() {
+                    checkout scm
+                }
+            }
         }
 
         stage('check java') {
-            sh "java -version"
+            steps {
+                withMaven() {
+                    sh "java -version"
+                }
+            }
         }
 
         stage('clean') {
-            sh "mvn clean"
+            steps {
+                withMaven() {
+                    sh "mvn clean"
+                }
+            }
         }
 
         stage('tests') {
-            sh "mvn test"
+            steps {
+                withMaven() {
+                    sh "mvn test"
+                }
+            }
         }
 
-        stage('Build and install to local maven repository ') {
-            sh "mvn compile package -DskipTests"
+        stage('Build') {
+            steps {
+                withMaven() {
+                    sh "mvn compile"
+                }
+            }
+        }
+
+        stage('Install to local maven repository ') {
+            when {
+                branch 'master'
+            }
+            steps {
+                withMaven() {
+                    sh "mvn install -DskipTests"
+                }
+            }
         }
 
 //        stage('package & publish to nexus') {
